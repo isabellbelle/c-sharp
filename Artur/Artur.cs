@@ -107,7 +107,7 @@ class Trax : Form {
         label1.Location = new Point(225, 400);
         label1.Width = 520;
         label1.Height = 60;
-        // label1.Click += new EventHandler(label1_Click);
+        // label1.Click += new EventHandler(label_Click);
         // label1.BackColor = Color.FromArgb(207, 60, 60);
         label1.BackColor = Color.White;
         label1.ForeColor = Color.Green;
