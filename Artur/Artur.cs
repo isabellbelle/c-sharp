@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Data;
 using System.Xml;
 
-class Trax : Form {
+public class Trax : Form {
     Panel panel;
     Button button1;
     // Метод-конструктор нашего класса
@@ -23,6 +23,8 @@ class Trax : Form {
         panel.Left = -10;
         this.Controls.Add(panel);
         
+        Click1();
+        
         // Добавляем кнопку в коллекцию элементов управления формы
         // Хотя на кнопке написано: "Нажми меня!",
         // пока при нажатии ничего не происходит!
@@ -39,14 +41,16 @@ class Trax : Form {
         button1.ForeColor = Color.White;
         panel.Controls.Add(button1);
 
+        // new EventHandler(Click);
+
         // Создадим элемент PictureBox, поместим в него изображение,
         // добавим его на форму
         PictureBox Artur = new PictureBox();
         Artur.SizeMode = PictureBoxSizeMode.StretchImage;
         Bitmap image1 = new Bitmap ("Artur.jpg");
         Artur.ClientSize = new Size(320, 240);
-        Artur.Top = 400;
-        Artur.Left = 481;
+        Artur.Top = 383;
+        Artur.Left = 522;
         Artur.Image = (Image)image1;
         panel.Controls.Add(Artur);
 
@@ -75,7 +79,10 @@ class Trax : Form {
         button1.Click += new EventHandler(button1_Click);
     }
     void button1_Click(object sender, EventArgs e) {
+
         panel.Controls.Clear();
+        
+        Click1();
 
         // Создадим элемент PictureBox, поместим в него изображение,
         // добавим его на форму
@@ -125,6 +132,22 @@ class Trax : Form {
         panel.Controls.Add(Cngt);
 
         }
+    void Click1() {
+        // Добавляем на панель метку
+        Label label1= new Label();
+        label1.BorderStyle = BorderStyle.FixedSingle;
+        label1.ClientSize = new Size(110, 20);
+        label1.Top = 630;
+        label1.Left = 817;
+        label1.Text = "Made by isabelle.";
+        label1.Font = new Font("Times New Roman", 10);
+        // label.Click += new EventHandler(label_Click);
+        // label.BackColor = Color.FromArgb(207, 60, 60);
+        label1.BackColor = Color.White;
+        label1.ForeColor = Color.Black;
+        panel.Controls.Add(label1);
+        // new System.EventHandler(Click);
+    }
     static void Main() {
         // Создаем и запускаем форму
         Application.Run(new Trax());
