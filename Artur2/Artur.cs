@@ -13,38 +13,39 @@ class Trax : Form {
     TableLayoutPanel thispnl;
     Button button;
     Button buttonl;
+    Button buttonc;
     Button buttonr;
 
-    public static void image() {
-        // Bitmap imgsp = new Bitmap ("sp.jpg");
-        Bitmap image1 = new Bitmap ("1.jpg"); // У тебя есть 10 секунд...
-        Bitmap image2 = new Bitmap ("2.jpg"); // Романтичный
-        Bitmap image3 = new Bitmap ("3.jpg"); // Квадратный
-        Bitmap image4 = new Bitmap ("4.jpg"); // 2D
-        Bitmap image5 = new Bitmap ("5.jpg"); // Решает вопросы
-        Bitmap image6 = new Bitmap ("6.jpg"); // Внепланетный
-        Bitmap image7 = new Bitmap ("7.jpg"); // С активистом
-        Bitmap image8 = new Bitmap ("8.jpg"); // Гей
-        Bitmap image9 = new Bitmap ("9.jpg"); // Спящий
-        Bitmap image10 = new Bitmap ("10.jpg"); // В цветах
-        Bitmap image11 = new Bitmap ("11.jpg"); // С пацанами
-        Bitmap image12 = new Bitmap ("12.jpg"); // Wide
-        Bitmap image13 = new Bitmap ("13.jpg"); // На солнце
-        Bitmap image14 = new Bitmap ("14.jpg"); // С кисами
-        Bitmap image15 = new Bitmap ("15.jpg"); // Игривый
-        Bitmap image16 = new Bitmap ("16.jpg"); // В теплой постели
-        Bitmap image17 = new Bitmap ("17.jpg"); // Без Артура
-        Bitmap image18 = new Bitmap ("18.jpg");
-        Bitmap image18_2 = new Bitmap ("18-2.jpg");
-        Bitmap image19 = new Bitmap ("19.jpg"); // Лисичка
-        Bitmap image20 = new Bitmap ("20.jpg"); // Сильный
-        Bitmap image21 = new Bitmap ("21.jpg"); // ...
-        Bitmap image22 = new Bitmap ("22.jpg"); // После душа
-        Bitmap image23 = new Bitmap ("23.jpg"); // Серьезный
-        Bitmap image24 = new Bitmap ("24.jpg"); // Опасный
-        Bitmap image25 = new Bitmap ("25.jpg"); // Горилла
-        Bitmap image26 = new Bitmap ("26.jpg"); // Природе
-    }
+    // public static void image() {
+    //     // Bitmap imgsp = new Bitmap ("sp.jpg");
+    //     Bitmap image1 = new Bitmap ("1.jpg"); // У тебя есть 10 секунд...
+    //     Bitmap image2 = new Bitmap ("2.jpg"); // Романтичный
+    //     Bitmap image3 = new Bitmap ("3.jpg"); // Квадратный
+    //     Bitmap image4 = new Bitmap ("4.jpg"); // 2D
+    //     Bitmap image5 = new Bitmap ("5.jpg"); // Решает вопросы
+    //     Bitmap image6 = new Bitmap ("6.jpg"); // Внепланетный
+    //     Bitmap image7 = new Bitmap ("7.jpg"); // С активистом
+    //     Bitmap image8 = new Bitmap ("8.jpg"); // Гей
+    //     Bitmap image9 = new Bitmap ("9.jpg"); // Спящий
+    //     Bitmap image10 = new Bitmap ("10.jpg"); // В цветах
+    //     Bitmap image11 = new Bitmap ("11.jpg"); // С пацанами
+    //     Bitmap image12 = new Bitmap ("12.jpg"); // Wide
+    //     Bitmap image13 = new Bitmap ("13.jpg"); // На солнце
+    //     Bitmap image14 = new Bitmap ("14.jpg"); // С кисами
+    //     Bitmap image15 = new Bitmap ("15.jpg"); // Игривый
+    //     Bitmap image16 = new Bitmap ("16.jpg"); // В теплой постели
+    //     Bitmap image17 = new Bitmap ("17.jpg"); // Без Артура
+    //     Bitmap image18 = new Bitmap ("18.jpg");
+    //     Bitmap image18_2 = new Bitmap ("18-2.jpg");
+    //     Bitmap image19 = new Bitmap ("19.jpg"); // Лисичка
+    //     Bitmap image20 = new Bitmap ("20.jpg"); // Сильный
+    //     Bitmap image21 = new Bitmap ("21.jpg"); // ...
+    //     Bitmap image22 = new Bitmap ("22.jpg"); // После душа
+    //     Bitmap image23 = new Bitmap ("23.jpg"); // Серьезный
+    //     Bitmap image24 = new Bitmap ("24.jpg"); // Опасный
+    //     Bitmap image25 = new Bitmap ("25.jpg"); // Горилла
+    //     Bitmap image26 = new Bitmap ("26.jpg"); // Природе
+    // }
     
     // Метод-конструктор нашего класса
     public Trax() {
@@ -148,13 +149,13 @@ class Trax : Form {
 		paneltabl.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 100F));
 		paneltabl.Dock = DockStyle.Fill;
 		paneltabl.RowCount = 7;
-		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
-		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
-		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 4F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 11F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 4F));
 		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 60F));
-		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 2F));
 		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 15F));
-		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 4F));
 		paneltabl.TabIndex = 0;
         paneltabl.BackColor = Color.FromArgb(210,210,230);
 		thispnl.Controls.Add(paneltabl);
@@ -168,12 +169,14 @@ class Trax : Form {
 		panelvr = new TableLayoutPanel ();
 		panelvr.AutoScroll = true;
 		panelvr.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-		panelvr.ColumnCount = 5;
-		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 10F));
+		panelvr.ColumnCount = 7;
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 5F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 30F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 5F));
 		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
-		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 40F));
-		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
-		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 10F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 5F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 30F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 5F));
 		panelvr.Dock = DockStyle.Fill;
 		panelvr.RowCount = 1;
 		panelvr.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
@@ -190,42 +193,53 @@ class Trax : Form {
         panelvr.Controls.Add(buttonl, 1, 0);
         // button.Click += new EventHandler(button1_Click);
 
+        buttonc = new Button();
+		buttonc.Dock = DockStyle.Fill;
+        buttonc.Font = new Font("Arial", buttonr.Width/2);
+        buttonc.Text = "v";
+        buttonc.BackColor = Color.Green;
+        buttonc.ForeColor = Color.White;
+        panelvr.Controls.Add(buttonc, 3, 0);
+        // buttonr.Click += new EventHandler(button1_Click);
+
         buttonr = new Button();
 		buttonr.Dock = DockStyle.Fill;
         buttonr.Font = new Font("Arial", buttonr.Width/2);
         buttonr.Text = "->";
         buttonr.BackColor = Color.Blue;
         buttonr.ForeColor = Color.White;
-        panelvr.Controls.Add(buttonr, 3, 0);
+        panelvr.Controls.Add(buttonr, 5, 0);
         // buttonr.Click += new EventHandler(button1_Click);
      }
 
     void panel_txt() { // панель с подписью
         // Добавляем панель для размещения остальных элементов управления
-		panelvr = new TableLayoutPanel ();
-		panelvr.AutoScroll = true;
-		panelvr.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-		panelvr.ColumnCount = 3;
-		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
-		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 60F));
-		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
-		panelvr.Dock = DockStyle.Fill;
-		panelvr.RowCount = 1;
-		panelvr.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
-		panelvr.TabIndex = 0;
-        panelvr.BackColor = Color.FromArgb(210,210,230);
-		paneltabl.Controls.Add(panelvr, 0, 1);
+		paneltxt = new TableLayoutPanel ();
+		paneltxt.AutoScroll = true;
+		paneltxt.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		paneltxt.ColumnCount = 3;
+		paneltxt.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		paneltxt.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 60F));
+		paneltxt.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		paneltxt.Dock = DockStyle.Fill;
+		paneltxt.RowCount = 1;
+		paneltxt.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
+		paneltxt.TabIndex = 0;
+        paneltxt.BackColor = Color.FromArgb(210,210,230);
+		paneltabl.Controls.Add(paneltxt, 0, 1);
 
-        // Создадим элемент PictureBox, поместим в него изображение,
-        // добавим его на форму
-        PictureBox Artur_p2 = new PictureBox();
-        Artur_p2.SizeMode = PictureBoxSizeMode.StretchImage;
-        Bitmap image3 = new Bitmap ("img/1.jpg");
-        Artur_p2.ClientSize = new Size(360, 480);
-        Artur_p2.Top = 18;
-        Artur_p2.Left = 10;
-        Artur_p2.Image = (Image)image3;
-        panel.Controls.Add(Artur_p2);
+        // добавление метки
+        Label labelpnl = new Label();
+		labelpnl.Dock = DockStyle.Top;
+        labelpnl.BorderStyle = BorderStyle.FixedSingle;
+        labelpnl.Dock = DockStyle.Fill;
+        labelpnl.Text = "У тебя есть 10 секунд...";
+        labelpnl.Font = new Font("Times New Roman", 38);
+        // label.BackColor = Color.FromArgb(207, 60, 60);
+        // label.BackColor = Color.FromArgb(247, 240, 190);
+        labelpnl.BackColor = Color.White;
+        labelpnl.ForeColor = Color.Black;
+        paneltxt.Controls.Add(labelpnl, 1, 0);
     }
     void panel_img() { // панель с *.jpg
         // Добавляем панель для размещения остальных элементов управления
@@ -233,14 +247,14 @@ class Trax : Form {
 		panelimg.AutoScroll = true;
 		panelimg.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 		panelimg.ColumnCount = 3;
-		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
-		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 60F));
-		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 30F));
+		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 40F));
+		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 30F));
 		panelimg.Dock = DockStyle.Fill;
 		panelimg.RowCount = 1;
 		panelimg.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
 		panelimg.TabIndex = 0;
-        panelimg.BackColor = Color.FromArgb(210,210,230);
+        panelimg.BackColor = Color.FromArgb(210, 210, 230);
 		paneltabl.Controls.Add(panelimg, 0, 3);
 
         // Создадим элемент PictureBox, поместим в него изображение,
@@ -248,9 +262,7 @@ class Trax : Form {
         PictureBox Artur_p2 = new PictureBox();
         Artur_p2.SizeMode = PictureBoxSizeMode.StretchImage;
         Bitmap image3 = new Bitmap ("img/1.jpg");
-        Artur_p2.ClientSize = new Size(360, 480);
-        Artur_p2.Top = 18;
-        Artur_p2.Left = 10;
+		Artur_p2.Dock = DockStyle.Fill;
         Artur_p2.Image = (Image)image3;
         panelimg.Controls.Add(Artur_p2, 1, 0);
      }
@@ -260,6 +272,7 @@ class Trax : Form {
         // panel_2();
         panel_tabl();
         panel_vr();
+        panel_txt();
         panel_img();
 
         // Добавляем панель
