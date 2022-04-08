@@ -13,7 +13,7 @@ class Trax : Form {
     TableLayoutPanel thispnl;
     Button button;
     Button buttonl;
-    Button buttonc;
+    Button buttonc1;
     Button buttonr;
 
     // public static void image() {
@@ -191,16 +191,16 @@ class Trax : Form {
         buttonl.BackColor = Color.Blue;
         buttonl.ForeColor = Color.White;
         panelvr.Controls.Add(buttonl, 1, 0);
-        // button.Click += new EventHandler(button1_Click);
+        // buttonд.Click += new EventHandler(button1_Click);
 
-        buttonc = new Button();
-		buttonc.Dock = DockStyle.Fill;
-        buttonc.Font = new Font("Arial", buttonr.Width/2);
-        buttonc.Text = "v";
-        buttonc.BackColor = Color.Green;
-        buttonc.ForeColor = Color.White;
-        panelvr.Controls.Add(buttonc, 3, 0);
-        // buttonr.Click += new EventHandler(button1_Click);
+        buttonc1 = new Button();
+		buttonc1.Dock = DockStyle.Fill;
+        buttonc1.Font = new Font("Arial", buttonc1.Width/2);
+        buttonc1.Text = "v";
+        buttonc1.BackColor = Color.Green;
+        buttonc1.ForeColor = Color.White;
+        panelvr.Controls.Add(buttonc1, 3, 0);
+        // buttonс.Click += new EventHandler(button1_Click);
 
         buttonr = new Button();
 		buttonr.Dock = DockStyle.Fill;
