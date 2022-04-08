@@ -6,7 +6,14 @@ using System.Xml;
 
 class Trax : Form {
     TableLayoutPanel panel;
+    TableLayoutPanel paneltabl;
+    TableLayoutPanel panelvr;
+    TableLayoutPanel panelimg;
+    TableLayoutPanel paneltxt;
+    TableLayoutPanel thispnl;
     Button button;
+    Button buttonl;
+    Button buttonr;
 
     public static void image() {
         // Bitmap imgsp = new Bitmap ("sp.jpg");
@@ -44,7 +51,50 @@ class Trax : Form {
         // Указываем заголовок окна
         this.Text = "Artur";
         this.Height = 700; this.Width = 950;
+        
+		thispnl = new TableLayoutPanel ();
+		thispnl.ColumnCount = 2;
+		thispnl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
+		thispnl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
+		thispnl.Dock = DockStyle.Fill;
+		thispnl.RowCount = 2;
+		thispnl.RowStyles.Add(new RowStyle(SizeType.Percent, 95F));
+		thispnl.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
+        Controls.Add(thispnl);
+        // Добавляем на панель метку
+        label_inf();
+        panel_bgn();
+        this.thispnl.Controls.Add(panel, 0, 0);
+        this.thispnl.SetColumnSpan(panel, 2);
+        // Добавляем панель
+        // panel_bgn();
 
+    }
+
+    void label_Click(object sender, System.EventArgs e) {
+        MessageBox.Show ("https://github.com/isabellbelle");
+    }
+
+    void label_inf() {
+        // Добавляем на панель метку
+        Label label = new Label();
+		label.Dock = DockStyle.Top;
+        label.BorderStyle = BorderStyle.FixedSingle;
+        label.Height = this.Height/25;
+        label.Text = "Made by isabelle. (tap here)";
+        label.Font = new Font("Times New Roman", 10);
+        // label.BackColor = Color.FromArgb(207, 60, 60);
+        // label.BackColor = Color.FromArgb(247, 240, 190);
+        label.BackColor = Color.White;
+        label.ForeColor = Color.Black;
+        label.Click += new EventHandler(label_Click);
+        
+        // TableLayoutPanel panelx= new TableLayoutPanel();
+        // panelx.Name = "panel";
+        thispnl.Controls.Add(label, 1, 1);
+    }
+
+    void panel_bgn() {
         // Добавляем панель для размещения остальных элементов управления
 		panel = new TableLayoutPanel ();
 		panel.AutoScroll = true;
@@ -64,11 +114,9 @@ class Trax : Form {
 		panel.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
 		panel.TabIndex = 0;
         panel.BackColor = Color.FromArgb(247, 240, 190);
-		this.Controls.Add(panel);
+		thispnl.Controls.Add(panel, 0, 0);
 
         // Добавляем кнопку в коллекцию элементов управления формы
-        // Хотя на кнопке написано: "Нажми меня!",
-        // пока при нажатии ничего не происходит!
         button = new Button();
 		button.Dock = DockStyle.Fill;
         button.Font = new Font("Arial", button.Width/2);
@@ -76,6 +124,7 @@ class Trax : Form {
         button.BackColor = Color.Green;
         button.ForeColor = Color.White;
         panel.Controls.Add(button, 2, 2);
+        button.Click += new EventHandler(button1_Click);
 
         // Создадим элемент PictureBox, поместим в него изображение,
         // добавим его на форму
@@ -86,25 +135,174 @@ class Trax : Form {
         sp.Height = this.Width*3/5;
         sp.Image = (Image)imgsp;
         panel.Controls.Add(sp, 1, 1);
-        this.panel.SetColumnSpan(sp, 3);
+        panel.SetColumnSpan(sp, 3);
+
+     }
+
+    void panel_tabl() { // панель с кнопками
+        // Добавляем панель для размещения остальных элементов управления
+		paneltabl = new TableLayoutPanel ();
+		paneltabl.AutoScroll = true;
+		paneltabl.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		paneltabl.ColumnCount = 1;
+		paneltabl.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 100F));
+		paneltabl.Dock = DockStyle.Fill;
+		paneltabl.RowCount = 7;
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 60F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 15F));
+		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		paneltabl.TabIndex = 0;
+        paneltabl.BackColor = Color.FromArgb(210,210,230);
+		thispnl.Controls.Add(paneltabl);
+        
+        this.thispnl.Controls.Add(paneltabl, 0, 0);
+        this.thispnl.SetColumnSpan(paneltabl, 2);
+     }
+
+    void panel_vr() { // панель с кнопками
+        // Добавляем панель для размещения остальных элементов управления
+		panelvr = new TableLayoutPanel ();
+		panelvr.AutoScroll = true;
+		panelvr.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		panelvr.ColumnCount = 5;
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 10F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 40F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 10F));
+		panelvr.Dock = DockStyle.Fill;
+		panelvr.RowCount = 1;
+		panelvr.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
+		panelvr.TabIndex = 0;
+        panelvr.BackColor = Color.FromArgb(210,210,230);
+		paneltabl.Controls.Add(panelvr, 0, 5);
+
+        buttonl = new Button();
+		buttonl.Dock = DockStyle.Fill;
+        buttonl.Font = new Font("Arial", buttonl.Width/2);
+        buttonl.Text = "<-";
+        buttonl.BackColor = Color.Blue;
+        buttonl.ForeColor = Color.White;
+        panelvr.Controls.Add(buttonl, 1, 0);
+        // button.Click += new EventHandler(button1_Click);
+
+        buttonr = new Button();
+		buttonr.Dock = DockStyle.Fill;
+        buttonr.Font = new Font("Arial", buttonr.Width/2);
+        buttonr.Text = "->";
+        buttonr.BackColor = Color.Blue;
+        buttonr.ForeColor = Color.White;
+        panelvr.Controls.Add(buttonr, 3, 0);
+        // buttonr.Click += new EventHandler(button1_Click);
+     }
+
+    void panel_txt() { // панель с подписью
+        // Добавляем панель для размещения остальных элементов управления
+		panelvr = new TableLayoutPanel ();
+		panelvr.AutoScroll = true;
+		panelvr.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		panelvr.ColumnCount = 3;
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 60F));
+		panelvr.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panelvr.Dock = DockStyle.Fill;
+		panelvr.RowCount = 1;
+		panelvr.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
+		panelvr.TabIndex = 0;
+        panelvr.BackColor = Color.FromArgb(210,210,230);
+		paneltabl.Controls.Add(panelvr, 0, 1);
+
+        // Создадим элемент PictureBox, поместим в него изображение,
+        // добавим его на форму
+        PictureBox Artur_p2 = new PictureBox();
+        Artur_p2.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap image3 = new Bitmap ("img/1.jpg");
+        Artur_p2.ClientSize = new Size(360, 480);
+        Artur_p2.Top = 18;
+        Artur_p2.Left = 10;
+        Artur_p2.Image = (Image)image3;
+        panel.Controls.Add(Artur_p2);
+    }
+    void panel_img() { // панель с *.jpg
+        // Добавляем панель для размещения остальных элементов управления
+		panelimg = new TableLayoutPanel ();
+		panelimg.AutoScroll = true;
+		panelimg.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		panelimg.ColumnCount = 3;
+		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 60F));
+		panelimg.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panelimg.Dock = DockStyle.Fill;
+		panelimg.RowCount = 1;
+		panelimg.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
+		panelimg.TabIndex = 0;
+        panelimg.BackColor = Color.FromArgb(210,210,230);
+		paneltabl.Controls.Add(panelimg, 0, 3);
+
+        // Создадим элемент PictureBox, поместим в него изображение,
+        // добавим его на форму
+        PictureBox Artur_p2 = new PictureBox();
+        Artur_p2.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap image3 = new Bitmap ("img/1.jpg");
+        Artur_p2.ClientSize = new Size(360, 480);
+        Artur_p2.Top = 18;
+        Artur_p2.Left = 10;
+        Artur_p2.Image = (Image)image3;
+        panelimg.Controls.Add(Artur_p2, 1, 0);
+     }
+
+    void button1_Click(object sender, EventArgs e) {
+        panel.Visible = false;
+        // panel_2();
+        panel_tabl();
+        panel_vr();
+        panel_img();
+
+        // Добавляем панель
+        // panel_1();
+    }
+    
+    /*
+    void panel_1() {
+        // Добавляем панель для размещения остальных элементов управления
+		panel1 = new TableLayoutPanel ();
+		panel1.AutoScroll = true;
+		panel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		panel1.ColumnCount = 5;
+		panel1.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panel1.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 10F));
+		panel1.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 40F));
+		panel1.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 10F));
+		panel1.ColumnStyles.Add (new ColumnStyle (SizeType.Percent, 20F));
+		panel1.Dock = DockStyle.Fill;
+		panel1.RowCount = 5;
+		panel1.RowStyles.Add (new RowStyle (SizeType.Percent, 10F));
+		panel1.RowStyles.Add (new RowStyle (SizeType.Percent, 40F));
+		panel1.RowStyles.Add (new RowStyle (SizeType.Percent, 25F));
+		panel1.RowStyles.Add (new RowStyle (SizeType.Percent, 20F));
+		panel1.RowStyles.Add (new RowStyle (SizeType.Percent, 5F));
+		panel1.TabIndex = 0;
+        panel1.BackColor = Color.FromArgb(247, 240, 190);
+		this.Controls.Add(panel1);
+
+        button = new Button();
+		button.Dock = DockStyle.Fill;
+        button.Font = new Font("Arial", button.Width/2);
+        button.Text = "Начать!";
+        button.BackColor = Color.Green;
+        button.ForeColor = Color.White;
+        panel.Controls.Add(button, 2, 2);
+        button.Click += new EventHandler(button1_Click);
 
         // Добавляем на панель метку
-        Label label = new Label();
-		label.Dock = DockStyle.Top;
-        label.BorderStyle = BorderStyle.FixedSingle;
-        label.Height = this.Height/25;
-        label.Text = "Made by isabelle. (tap here)";
-        label.Font = new Font("Times New Roman", 10);
-        label.Click += new EventHandler(label_Click);
-        // label.BackColor = Color.FromArgb(207, 60, 60);
-        label.BackColor = Color.FromArgb(247, 240, 190);
-        label.ForeColor = Color.Black;
-        panel.Controls.Add(label, 4, 4);
+        // label_inf();
+     }
+*/
 
-    }
-    void label_Click(object sender, System.EventArgs e) {
-        MessageBox.Show ("https://github.com/isabellbelle");
-    }
     static void Main() {
         // Создаем и запускаем форму
         Application.Run(new Trax());
