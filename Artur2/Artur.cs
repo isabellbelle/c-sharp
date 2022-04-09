@@ -5,47 +5,60 @@ using System.Data;
 using System.Xml;
 
 class Trax : Form {
-    TableLayoutPanel panel;
-    TableLayoutPanel paneltabl;
-    TableLayoutPanel panelvr;
-    TableLayoutPanel panelimg;
-    TableLayoutPanel paneltxt;
-    TableLayoutPanel thispnl;
+    TableLayoutPanel panel; // на thispnl
+    TableLayoutPanel paneltabl; // на thispnl
+    TableLayoutPanel panelvr; // на paneltabl
+    TableLayoutPanel panelimg; // на paneltabl
+    TableLayoutPanel paneltxt; // на paneltabl
+    TableLayoutPanel thispnl; // на this
     Button button;
+    Button btn;
     Button buttonl;
-    Button buttonc1;
+    Button buttonc;
     Button buttonr;
+    Int32 numch;
+    string [] arraych;
 
-    // public static void image() {
-    //     // Bitmap imgsp = new Bitmap ("sp.jpg");
-    //     Bitmap image1 = new Bitmap ("1.jpg"); // У тебя есть 10 секунд...
-    //     Bitmap image2 = new Bitmap ("2.jpg"); // Романтичный
-    //     Bitmap image3 = new Bitmap ("3.jpg"); // Квадратный
-    //     Bitmap image4 = new Bitmap ("4.jpg"); // 2D
-    //     Bitmap image5 = new Bitmap ("5.jpg"); // Решает вопросы
-    //     Bitmap image6 = new Bitmap ("6.jpg"); // Внепланетный
-    //     Bitmap image7 = new Bitmap ("7.jpg"); // С активистом
-    //     Bitmap image8 = new Bitmap ("8.jpg"); // Гей
-    //     Bitmap image9 = new Bitmap ("9.jpg"); // Спящий
-    //     Bitmap image10 = new Bitmap ("10.jpg"); // В цветах
-    //     Bitmap image11 = new Bitmap ("11.jpg"); // С пацанами
-    //     Bitmap image12 = new Bitmap ("12.jpg"); // Wide
-    //     Bitmap image13 = new Bitmap ("13.jpg"); // На солнце
-    //     Bitmap image14 = new Bitmap ("14.jpg"); // С кисами
-    //     Bitmap image15 = new Bitmap ("15.jpg"); // Игривый
-    //     Bitmap image16 = new Bitmap ("16.jpg"); // В теплой постели
-    //     Bitmap image17 = new Bitmap ("17.jpg"); // Без Артура
-    //     Bitmap image18 = new Bitmap ("18.jpg");
-    //     Bitmap image18_2 = new Bitmap ("18-2.jpg");
-    //     Bitmap image19 = new Bitmap ("19.jpg"); // Лисичка
-    //     Bitmap image20 = new Bitmap ("20.jpg"); // Сильный
-    //     Bitmap image21 = new Bitmap ("21.jpg"); // ...
-    //     Bitmap image22 = new Bitmap ("22.jpg"); // После душа
-    //     Bitmap image23 = new Bitmap ("23.jpg"); // Серьезный
-    //     Bitmap image24 = new Bitmap ("24.jpg"); // Опасный
-    //     Bitmap image25 = new Bitmap ("25.jpg"); // Горилла
-    //     Bitmap image26 = new Bitmap ("26.jpg"); // Природе
-    // }
+    string [] image() {
+        
+        string [] arraych = {"18-2.jpg", "У тебя есть 10 секунд...", "Романтичный",
+        "Квадратный", "2D", "Решает вопросы", "Внепланетный", "С активистом",
+        "Гей", "Спящий", "В цветах", "С пацанами", "Wide", "На солнце", "С кисами",
+        "Игривый", "После сна", "Без Артура", "18-2.jpg", "Лисичка", "За мир",
+        "...", "После душа", "Серьезный", "Опасный", "Горилла", "Фото для мамы"};
+
+/*
+        // Bitmap imgsp = new Bitmap ("sp.jpg");
+        Bitmap image1 = new Bitmap ("1.jpg"); // У тебя есть 10 секунд...
+        Bitmap image2 = new Bitmap ("2.jpg"); // Романтичный
+        Bitmap image3 = new Bitmap ("3.jpg"); // Квадратный
+        Bitmap image4 = new Bitmap ("4.jpg"); // 2D
+        Bitmap image5 = new Bitmap ("5.jpg"); // Решает вопросы
+        Bitmap image6 = new Bitmap ("6.jpg"); // Внепланетный
+        Bitmap image7 = new Bitmap ("7.jpg"); // С активистом
+        Bitmap image8 = new Bitmap ("8.jpg"); // Гей
+        Bitmap image9 = new Bitmap ("9.jpg"); // Спящий
+        Bitmap image10 = new Bitmap ("10.jpg"); // В цветах
+        Bitmap image11 = new Bitmap ("11.jpg"); // С пацанами
+        Bitmap image12 = new Bitmap ("12.jpg"); // Wide
+        Bitmap image13 = new Bitmap ("13.jpg"); // На солнце
+        Bitmap image14 = new Bitmap ("14.jpg"); // С кисами
+        Bitmap image15 = new Bitmap ("15.jpg"); // Игривый
+        Bitmap image16 = new Bitmap ("16.jpg"); // После сна
+        Bitmap image17 = new Bitmap ("17.jpg"); // Без Артура
+        Bitmap image18 = new Bitmap ("18.jpg");
+        Bitmap image18_2 = new Bitmap ("18-2.jpg");
+        Bitmap image19 = new Bitmap ("19.jpg"); // Лисичка
+        Bitmap image20 = new Bitmap ("20.jpg"); // За мир
+        Bitmap image21 = new Bitmap ("21.jpg"); // ...
+        Bitmap image22 = new Bitmap ("22.jpg"); // После душа
+        Bitmap image23 = new Bitmap ("23.jpg"); // Серьезный
+        Bitmap image24 = new Bitmap ("24.jpg"); // Опасный
+        Bitmap image25 = new Bitmap ("25.jpg"); // Горилла
+        Bitmap image26 = new Bitmap ("26.jpg"); // Фото для мамы
+*/
+        return arraych;
+    }
     
     // Метод-конструктор нашего класса
     public Trax() {
@@ -95,7 +108,7 @@ class Trax : Form {
         thispnl.Controls.Add(label, 1, 1);
     }
 
-    void panel_bgn() {
+    void panel_bgn() { // thispnl на panel
         // Добавляем панель для размещения остальных элементов управления
 		panel = new TableLayoutPanel ();
 		panel.AutoScroll = true;
@@ -140,7 +153,7 @@ class Trax : Form {
 
      }
 
-    void panel_tabl() { // панель с кнопками
+    void panel_tabl() { // paneltabl на thispanel
         // Добавляем панель для размещения остальных элементов управления
 		paneltabl = new TableLayoutPanel ();
 		paneltabl.AutoScroll = true;
@@ -164,7 +177,7 @@ class Trax : Form {
         this.thispnl.SetColumnSpan(paneltabl, 2);
      }
 
-    void panel_vr() { // панель с кнопками
+    void panel_vr() { // панель с кнопками на paneltabl
         // Добавляем панель для размещения остальных элементов управления
 		panelvr = new TableLayoutPanel ();
 		panelvr.AutoScroll = true;
@@ -181,7 +194,7 @@ class Trax : Form {
 		panelvr.RowCount = 1;
 		panelvr.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
 		panelvr.TabIndex = 0;
-        panelvr.BackColor = Color.FromArgb(210,210,230);
+        panelvr.BackColor = Color.FromArgb(210 ,210, 230);
 		paneltabl.Controls.Add(panelvr, 0, 5);
 
         buttonl = new Button();
@@ -191,16 +204,16 @@ class Trax : Form {
         buttonl.BackColor = Color.Blue;
         buttonl.ForeColor = Color.White;
         panelvr.Controls.Add(buttonl, 1, 0);
-        // buttonд.Click += new EventHandler(button1_Click);
+        buttonl.Click += new EventHandler(ClickL);
 
-        buttonc1 = new Button();
-		buttonc1.Dock = DockStyle.Fill;
-        buttonc1.Font = new Font("Arial", buttonc1.Width/2);
-        buttonc1.Text = "v";
-        buttonc1.BackColor = Color.Green;
-        buttonc1.ForeColor = Color.White;
-        panelvr.Controls.Add(buttonc1, 3, 0);
-        // buttonс.Click += new EventHandler(button1_Click);
+        buttonc = new Button();
+		buttonc.Dock = DockStyle.Fill;
+        buttonc.Font = new Font("Arial", buttonc.Width/2);
+        buttonc.Text = "v";
+        buttonc.BackColor = Color.Green;
+        buttonc.ForeColor = Color.White;
+        panelvr.Controls.Add(buttonc, 3, 0);
+        buttonc.Click += new EventHandler(MakeChs);
 
         buttonr = new Button();
 		buttonr.Dock = DockStyle.Fill;
@@ -209,7 +222,7 @@ class Trax : Form {
         buttonr.BackColor = Color.Blue;
         buttonr.ForeColor = Color.White;
         panelvr.Controls.Add(buttonr, 5, 0);
-        // buttonr.Click += new EventHandler(button1_Click);
+        buttonr.Click += new EventHandler(ClickR);
      }
 
     void panel_txt() { // панель с подписью
@@ -225,21 +238,11 @@ class Trax : Form {
 		paneltxt.RowCount = 1;
 		paneltxt.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
 		paneltxt.TabIndex = 0;
-        paneltxt.BackColor = Color.FromArgb(210,210,230);
+        paneltxt.BackColor = Color.FromArgb(210, 210, 230);
 		paneltabl.Controls.Add(paneltxt, 0, 1);
 
-        // добавление метки
-        Label labelpnl = new Label();
-		labelpnl.Dock = DockStyle.Top;
-        labelpnl.BorderStyle = BorderStyle.FixedSingle;
-        labelpnl.Dock = DockStyle.Fill;
-        labelpnl.Text = "У тебя есть 10 секунд...";
-        labelpnl.Font = new Font("Times New Roman", 38);
-        // label.BackColor = Color.FromArgb(207, 60, 60);
-        // label.BackColor = Color.FromArgb(247, 240, 190);
-        labelpnl.BackColor = Color.White;
-        labelpnl.ForeColor = Color.Black;
-        paneltxt.Controls.Add(labelpnl, 1, 0);
+        // // добавление метки
+        // AddTxt(1);
     }
     void panel_img() { // панель с *.jpg
         // Добавляем панель для размещения остальных элементов управления
@@ -257,28 +260,114 @@ class Trax : Form {
         panelimg.BackColor = Color.FromArgb(210, 210, 230);
 		paneltabl.Controls.Add(panelimg, 0, 3);
 
-        // Создадим элемент PictureBox, поместим в него изображение,
-        // добавим его на форму
-        PictureBox Artur_p2 = new PictureBox();
-        Artur_p2.SizeMode = PictureBoxSizeMode.StretchImage;
-        Bitmap image3 = new Bitmap ("img/1.jpg");
-		Artur_p2.Dock = DockStyle.Fill;
-        Artur_p2.Image = (Image)image3;
-        panelimg.Controls.Add(Artur_p2, 1, 0);
+        // // Создадим элемент PictureBox, поместим в него изображение,
+        // // добавим его на форму
+        // AddImg(8);
      }
 
     void button1_Click(object sender, EventArgs e) {
         panel.Visible = false;
-        // panel_2();
+
+        btn = new Button();
+		btn.Dock = DockStyle.Fill;
+        btn.Font = new Font("Arial", btn.Width/2);
+        btn.Text = "->";
+        btn.BackColor = Color.FromArgb(200, 200, 200);
+        btn.ForeColor = Color.FromArgb(150, 150, 200);
+        thispnl.Controls.Add(btn, 0, 0);
+        this.thispnl.SetColumnSpan(btn, 2);
+        btn.Click += new EventHandler(button2_Click);
+
+        numch = NumCh(numch, 1);
+    }
+    void button2_Click(object sender, EventArgs e) {
+        btn.Visible = false;
+        arraych = image();
         panel_tabl();
         panel_vr();
         panel_txt();
         panel_img();
-
-        // Добавляем панель
-        // panel_1();
+        // numch = NumCh(numch, 1);
+        AddImg(1);
+        AddTxt(1);
     }
+
+	void AddImg (int num) {
+	// 	Button button = new Button ();
+	// 	button.Dock = DockStyle.Top;
+	// 	button.Height = 200;
+	// 	button.Text = row.ToString ();
+	// 	button.Click += new EventHandler (Button_Click);
+	// 	_tableLayoutPanel.Controls.Add (button, 2, row);
+
+        PictureBox imagech = new PictureBox();
+        imagech.SizeMode = PictureBoxSizeMode.StretchImage;
+        string strimgname = "img/" + num + ".jpg";
+        Bitmap imagechjpg = new Bitmap (strimgname);
+		imagech.Dock = DockStyle.Fill;
+        imagech.Image = (Image)imagechjpg;
+        panelimg.Controls.Add(imagech, 1, 0);
+	// 	imagech.Click += new EventHandler(Image_Click);
+	}
+
+	void AddTxt (int num) {
+        Label labelpnl = new Label();
+		labelpnl.Dock = DockStyle.Top;
+        labelpnl.BorderStyle = BorderStyle.FixedSingle;
+        labelpnl.Dock = DockStyle.Fill;
+        String strtxtname = arraych[num];
+        // String strtxtname = "У тебя есть 10 секунд...";
+        labelpnl.Text = strtxtname;
+        labelpnl.Font = new Font("Times New Roman", 38);
+        // label.BackColor = Color.FromArgb(207, 60, 60);
+        // label.BackColor = Color.FromArgb(247, 240, 190);
+        labelpnl.BackColor = Color.White;
+        labelpnl.ForeColor = Color.Black;
+        paneltxt.Controls.Add(labelpnl, 1, 0);
+	// 	labelpnl.Click += new EventHandler(Label_Click);
+	}
+
+	void ClickR(object sender, EventArgs args) {
+		// ((Control) sender).Visible = false;
+		panelimg.Controls.Clear();
+		paneltxt.Controls.Clear();
+
+        // Создадим элемент PictureBox, поместим в него изображение,
+        // добавим его на форму
+        numch = NumCh(numch, 1);
+        AddImg(numch);
+        AddTxt(numch);
+        Console.Write("{0} ", numch);
+	}
+
+	void MakeChs(object sender, EventArgs args) {
+		// ((Control) sender).Visible = false;
+        string strchs = "Artur " + arraych[numch];
+        MessageBox.Show(strchs, "Ваш выбор:");
+
+		paneltabl.Visible = false;
+
+        Console.Write("{0} ", numch);
+	}
+
+	void ClickL(object sender, EventArgs args) {
+		// ((Control) sender).Visible = false;
+		panelimg.Controls.Clear();
+		paneltxt.Controls.Clear();
+
+        // Создадим элемент PictureBox, поместим в него изображение,
+        // добавим его на форму
+        numch = NumCh(numch, -1);
+        AddImg(numch);
+        AddTxt(numch);
+        Console.Write("{0} ", numch);
+	}
     
+    int NumCh(int numch, int b) {
+        numch = (numch + b + 25)%26 + 1;
+        return numch;
+    }
+
     /*
     void panel_1() {
         // Добавляем панель для размещения остальных элементов управления
