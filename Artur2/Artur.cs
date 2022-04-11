@@ -22,8 +22,8 @@ class Trax : Form {
     string [] image() {
         
         string [] arraych = {"18-2.jpg", "У тебя есть 10 секунд...", "Романтичный",
-        "Квадратный", "2D", "Решает вопросы", "Внепланетный", "С активистом",
-        "Гей", "Спящий", "В цветах", "С пацанами", "Wide", "На солнце", "С кисами",
+        "Квадратный", "2D", "Решает вопросы", "Внепланетарный", "С активистом",
+        "Гей", "Спящий", "В цветах", "С пацанами (не геи)", "Wide", "На солнце", "С кисами",
         "Игривый", "После сна", "Без Артура", "18-2.jpg", "Лисичка", "За мир",
         "...", "После душа", "Серьезный", "Опасный", "Горилла", "Фото для мамы"};
 
@@ -280,6 +280,7 @@ class Trax : Form {
 
         numch = NumCh(numch, 1);
     }
+    
     void button2_Click(object sender, EventArgs e) {
         btn.Visible = false;
         arraych = image();
@@ -303,7 +304,7 @@ class Trax : Form {
         PictureBox imagech = new PictureBox();
         imagech.SizeMode = PictureBoxSizeMode.StretchImage;
         string strimgname = "img/" + num + ".jpg";
-        Bitmap imagechjpg = new Bitmap (strimgname);
+        Bitmap imagechjpg = new Bitmap(strimgname);
 		imagech.Dock = DockStyle.Fill;
         imagech.Image = (Image)imagechjpg;
         panelimg.Controls.Add(imagech, 1, 0);
@@ -311,20 +312,31 @@ class Trax : Form {
 	}
 
 	void AddTxt (int num) {
-        Label labelpnl = new Label();
-		labelpnl.Dock = DockStyle.Top;
-        labelpnl.BorderStyle = BorderStyle.FixedSingle;
-        labelpnl.Dock = DockStyle.Fill;
-        String strtxtname = arraych[num];
-        // String strtxtname = "У тебя есть 10 секунд...";
-        labelpnl.Text = strtxtname;
-        labelpnl.Font = new Font("Times New Roman", 38);
-        // label.BackColor = Color.FromArgb(207, 60, 60);
-        // label.BackColor = Color.FromArgb(247, 240, 190);
-        labelpnl.BackColor = Color.White;
-        labelpnl.ForeColor = Color.Black;
-        paneltxt.Controls.Add(labelpnl, 1, 0);
-	// 	labelpnl.Click += new EventHandler(Label_Click);
+        if (num != 18) {
+            Label labelpnl = new Label();
+            labelpnl.Dock = DockStyle.Top;
+            labelpnl.BorderStyle = BorderStyle.FixedSingle;
+            labelpnl.Dock = DockStyle.Fill;
+            String strtxtname = arraych[num];
+            // String strtxtname = "У тебя есть 10 секунд...";
+            labelpnl.Text = strtxtname;
+            labelpnl.Font = new Font("Times New Roman", 38);
+            // label.BackColor = Color.FromArgb(207, 60, 60);
+            // label.BackColor = Color.FromArgb(247, 240, 190);
+            labelpnl.BackColor = Color.White;
+            labelpnl.ForeColor = Color.Black;
+            paneltxt.Controls.Add(labelpnl, 1, 0);
+        // 	labelpnl.Click += new EventHandler(Label_Click);
+        } else {
+            PictureBox imagech = new PictureBox();
+            imagech.SizeMode = PictureBoxSizeMode.StretchImage;
+            string strimgname = "img/" + arraych[0];
+            Bitmap imagechtxt = new Bitmap(strimgname);
+            imagech.Dock = DockStyle.Fill;
+            imagech.Image = (Image)imagechtxt;
+            paneltxt.Controls.Add(imagech, 1, 0);
+	    // 	imagech.Click += new EventHandler(Image_Click);
+        }
 	}
 
 	void ClickR(object sender, EventArgs args) {
@@ -337,7 +349,7 @@ class Trax : Form {
         numch = NumCh(numch, 1);
         AddImg(numch);
         AddTxt(numch);
-        Console.Write("{0} ", numch);
+        // Console.Write("{0} ", numch);
 	}
 
 	void MakeChs(object sender, EventArgs args) {
@@ -347,7 +359,7 @@ class Trax : Form {
 
 		paneltabl.Visible = false;
 
-        Console.Write("{0} ", numch);
+        // Console.Write("{0} ", numch);
 	}
 
 	void ClickL(object sender, EventArgs args) {
