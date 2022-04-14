@@ -466,6 +466,10 @@ class Trax : Form {
 
         prt = ""; prt1 = "";
 
+        textBox1.Text = "\tпояснение1\r\n(нагло)\r\n*сотрите текст и введите свой\r\n**поле может быть пустым";
+        textBox2.Text = "\tдействие\r\n(украсть)\r\n*сотрите текст и введите свой\r\n**поле не может быть пустым";
+        textBox3.Text = "\tпояснение2\r\n(все носки)\r\n*сотрите текст и введите свой\r\n**поле может быть пустым";
+        
         button = new Button();
 		button.Dock = DockStyle.Fill;
         button.Font = new Font("Arial", button.Width/2);
@@ -500,22 +504,22 @@ class Trax : Form {
         
         textBox1 = new TextBox();
         textBox1.Multiline = true;
-        textBox1.Text = "огурцом";
-        textBox1.Font = new Font("Times New Roman", 20);
+        textBox1.Text = "\tпояснение1\r\n(нагло)\r\n*сотрите текст и введите свой\r\n**поле может быть пустым";
+        textBox1.Font = new Font("Times New Roman", 12);
         textBox1.Dock = DockStyle.Fill;
         paneldnglbl.Controls.Add(textBox1, 1, 0);
         
         textBox2 = new TextBox();
         textBox2.Multiline = true;
-        textBox2.Text = "трахнуть";
-        textBox2.Font = new Font("Times New Roman", 20);
+        textBox2.Text = "\tдействие\r\n(украсть)\r\n*сотрите текст и введите свой\r\n**поле не может быть пустым";
+        textBox2.Font = new Font("Times New Roman", 12);
         textBox2.Dock = DockStyle.Fill;
         paneldnglbl.Controls.Add(textBox2, 3, 0);
         
         textBox3 = new TextBox();
         textBox3.Multiline = true;
-        textBox3.Text = "анал";
-        textBox3.Font = new Font("Times New Roman", 20);
+        textBox3.Text = "\tпояснение2\r\n(все носки)\r\n*сотрите текст и введите свой\r\n**поле может быть пустым";
+        textBox3.Font = new Font("Times New Roman", 12);
         textBox3.Dock = DockStyle.Fill;
         paneldnglbl.Controls.Add(textBox3, 5, 0);
         
@@ -551,19 +555,31 @@ class Trax : Form {
     }
     
     void button_Click1(object sender, EventArgs args) {
-        string txt = Convert.ToString(textBox1.Text) + " " +
-        Convert.ToString(textBox2.Text) + " " +
-        Convert.ToString(textBox3.Text) + "!";
-        
-        txt1 = Convert.ToString(textBox1.Text) + " " +
-        Convert.ToString(textBox2.Text).Substring(0, Convert.ToString(textBox2.Text).Length - 2) +
-        "ли " + Convert.ToString(textBox3.Text);
+        string txt = "";
+
+        if (Convert.ToString(textBox1.Text) != "") {
+            txt = Convert.ToString(textBox1.Text) + " ";
+            txt1 = Convert.ToString(textBox1.Text) + " ";
+        }
+
+        txt = txt +
+        Convert.ToString(textBox2.Text);
+        txt1 = txt1 +
+        Convert.ToString(textBox2.Text).Substring(0, Convert.ToString(textBox2.Text).Length - 2) + "ли ";
+
+        if (Convert.ToString(textBox3.Text) != "") {
+            txt = txt + " " + Convert.ToString(textBox3.Text);
+            txt1 = txt1 + Convert.ToString(textBox3.Text);
+        }
+
+        txt = txt + "!";
 
         if (prt != "") {
             txt = prt + " и " + txt;
             txt1 = prt1 + " и " + txt1;
         }
         txt1 = "Вы "  + txt1 + " " + arraych[numch] + " Артура!";
+        // txt1 = "Вы "  + txt1 + "\r\n" + arraych[numch] + " Артура!";
         
         // paneldnglbl.Visible = false;
         // button.Visible = false;
@@ -590,15 +606,37 @@ class Trax : Form {
             prt1 += ", ";
         }
 
-        textBox1.Controls.Clear();
+        // textBox1.Controls.Clear();
 
-        prt = prt + Convert.ToString(textBox1.Text) + " " +
-        Convert.ToString(textBox2.Text) + " " +
-        Convert.ToString(textBox3.Text);
+        // prt = prt + Convert.ToString(textBox1.Text) + " " +
+        // Convert.ToString(textBox2.Text) + " " +
+        // Convert.ToString(textBox3.Text);
         
-        prt1 = prt1 + Convert.ToString(textBox1.Text) + " " +
-        Convert.ToString(textBox2.Text).Substring(0, Convert.ToString(textBox2.Text).Length - 2) + "ли " +
-        Convert.ToString(textBox3.Text);
+        // prt1 = prt1 + Convert.ToString(textBox1.Text) + " " +
+        // Convert.ToString(textBox2.Text).Substring(0, Convert.ToString(textBox2.Text).Length - 2) + "ли " +
+        // Convert.ToString(textBox3.Text);
+        
+        if (Convert.ToString(textBox1.Text) != "") {
+            prt += Convert.ToString(textBox1.Text) + " ";
+            prt1 += Convert.ToString(textBox1.Text) + " ";
+        }
+
+        prt = prt +
+        Convert.ToString(textBox2.Text);
+        prt1 = prt1 +
+        Convert.ToString(textBox2.Text).Substring(0, Convert.ToString(textBox2.Text).Length - 2) + "ли ";
+
+        if (Convert.ToString(textBox3.Text) != "") {
+            prt = prt + " " + Convert.ToString(textBox3.Text);
+            prt1 = prt1 + Convert.ToString(textBox3.Text);
+        }
+        
+        textBox1.Multiline = true;
+        textBox1.Text = "\tпояснение1";
+        textBox2.Multiline = true;
+        textBox2.Text = "\tдействие";
+        textBox3.Multiline = true;
+        textBox3.Text = "\tпояснение2";
     }
     
 	void PanelEnd() { // создание панели
