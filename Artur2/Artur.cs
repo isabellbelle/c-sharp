@@ -184,10 +184,22 @@ class Trax : Form {
         button.Click += new EventHandler(button1_Click);
     }
 
-    void makeell() {}
+    void makeell() {
+        arraych = image();
+        
+        panel_tabl();
+        panel_vr();
+        panel_txt();
+        panel_img();
+        createpnlvrbtn();
+        paneldngpnl();
+        pnldngpnl();
+        DngPnlLbl();
+        PanelEnd();
+        EndBtn();
+    }
 
-    void panel_tabl() { // paneltabl на thispanel
-        // Добавляем панель для размещения остальных элементов управления
+    void panel_tabl() { // создание панели
 		paneltabl = new TableLayoutPanel ();
 		paneltabl.AutoScroll = true;
 		paneltabl.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -204,14 +216,9 @@ class Trax : Form {
 		paneltabl.RowStyles.Add (new RowStyle (SizeType.Percent, 2F));
 		paneltabl.TabIndex = 0;
         paneltabl.BackColor = Color.FromArgb(215,220,210);
-		window.Controls.Add(paneltabl);
-        
-        // this.thispnl.Controls.Add(paneltabl, 0, 0);
-        // this.thispnl.SetColumnSpan(paneltabl, 2);
     }
 
-    void panel_vr() { // панель с кнопками на paneltabl
-        // Добавляем панель для размещения остальных элементов управления
+    void panel_vr() { // создание панели
 		panelvr = new TableLayoutPanel ();
 		panelvr.AutoScroll = true;
 		panelvr.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -231,9 +238,9 @@ class Trax : Form {
 		panelvr.RowStyles.Add (new RowStyle (SizeType.Percent, 80F));
 		panelvr.RowStyles.Add (new RowStyle (SizeType.Percent, 10F));
 		panelvr.TabIndex = 0;
-        // panelvr.BackColor = Color.FromArgb(215,220,210);
-		paneltabl.Controls.Add(panelvr, 0, 5);
+     }
 
+    void createpnlvrbtn() { // создание кнопок на панели panelvr
         buttonl = new Button();
 		buttonl.Dock = DockStyle.Fill;
         buttonl.Font = new Font("Arial", buttonl.Width/2);
@@ -271,10 +278,9 @@ class Trax : Form {
         panelvr.Controls.Add(buttonr, 7, 0);
         buttonr.Click += new EventHandler(ClickR);
         panelvr.SetRowSpan(buttonr, 3);
-     }
+        }
 
-    void panel_txt() { // панель с подписью
-        // Добавляем панель для размещения остальных элементов управления
+    void panel_txt() { // создание панели
 		paneltxt = new TableLayoutPanel ();
 		paneltxt.AutoScroll = true;
 		paneltxt.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -286,15 +292,10 @@ class Trax : Form {
 		paneltxt.RowCount = 1;
 		paneltxt.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
 		paneltxt.TabIndex = 0;
-        // paneltxt.BackColor = Color.FromArgb(215,220,210);
 		paneltabl.Controls.Add(paneltxt, 0, 1);
-
-        // // добавление метки
-        // AddTxt(1);
     }
     
-    void panel_img() { // панель с *.jpg
-        // Добавляем панель для размещения остальных элементов управления
+    void panel_img() { // создание панели
 		panelimg = new TableLayoutPanel ();
 		panelimg.AutoScroll = true;
 		panelimg.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -306,27 +307,23 @@ class Trax : Form {
 		panelimg.RowCount = 1;
 		panelimg.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
 		panelimg.TabIndex = 0;
-        // panelimg.BackColor = Color.FromArgb(215,220,210);
 		paneltabl.Controls.Add(panelimg, 0, 3);
+    }
 
-        // // Создадим элемент PictureBox, поместим в него изображение,
-        // // добавим его на форму
-        // AddImg(8);
-     }
-
-    void button1_Click(object sender, EventArgs e) { // вызов button1_Click, image()
+    void button1_Click(object sender, EventArgs e) { // вызов button2_Click, image()
         window.Controls.Clear();
-
-        arraych = image();
 
         btn = new Button();
 		btn.Dock = DockStyle.Fill;
-        btn.Font = new Font("Arial", btn.Width*2);
-        btn.Text = "->";
+        btn.Font = new Font("Arial", btn.Width);
+        btn.Text = "tap here";
         btn.BackColor = Color.FromArgb(230, 230, 230);
-        btn.ForeColor = Color.White;
+        // btn.ForeColor = Color.Cyan;
+        btn.ForeColor = Color.Magenta;
         window.Controls.Add(btn);
         btn.Click += new EventHandler(button2_Click);
+
+        makeell();
 
         // numch = NumCh(numch, 1);
         numch = 1;
@@ -336,24 +333,16 @@ class Trax : Form {
     // вызов panel_tabl, panel_vr, panel_txt, panel_img, AddImg, AddTxt
     void button2_Click(object sender, EventArgs e) {
         window.Controls.Clear();
+		panelimg.Controls.Clear();
 
-        panel_tabl();
-        panel_vr();
-        panel_txt();
-        panel_img();
+		window.Controls.Add(paneltabl);
+		paneltabl.Controls.Add(panelvr, 0, 5);
 
         AddImg(numch);
         AddTxt(numch);
     }
 
-	void AddImg (int num) {
-	// 	Button button = new Button ();
-	// 	button.Dock = DockStyle.Top;
-	// 	button.Height = 200;
-	// 	button.Text = row.ToString ();
-	// 	button.Click += new EventHandler (Button_Click);
-	// 	_tableLayoutPanel.Controls.Add (button, 2, row);
-
+	void AddImg (int num) { // создание image на panelimg
         PictureBox imagech = new PictureBox();
         imagech.SizeMode = PictureBoxSizeMode.StretchImage;
         string strimgname = "img/" + num + ".jpg";
@@ -364,22 +353,18 @@ class Trax : Form {
 	// 	imagech.Click += new EventHandler(Image_Click);
 	}
 
-	void AddTxt (int num) {
+	void AddTxt (int num) { // создание label на paneltxt
         if (num != 18) {
             Label labelpnl = new Label();
             labelpnl.Dock = DockStyle.Top;
             labelpnl.BorderStyle = BorderStyle.FixedSingle;
             labelpnl.Dock = DockStyle.Fill;
             String strtxtname = arraych[num];
-            // String strtxtname = "У тебя есть 10 секунд...";
             labelpnl.Text = strtxtname;
             labelpnl.Font = new Font("Times New Roman", 38);
-            // label.BackColor = Color.FromArgb(207, 60, 60);
-            // label.BackColor = Color.FromArgb(247, 240, 190);
             labelpnl.BackColor = Color.White;
             labelpnl.ForeColor = Color.Black;
             paneltxt.Controls.Add(labelpnl, 1, 0);
-        // 	labelpnl.Click += new EventHandler(Label_Click);
         } else {
             PictureBox imagech = new PictureBox();
             imagech.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -393,16 +378,12 @@ class Trax : Form {
 	}
 
 	void ClickR(object sender, EventArgs args) {
-		// ((Control) sender).Visible = false;
 		panelimg.Controls.Clear();
 		paneltxt.Controls.Clear();
 
-        // Создадим элемент PictureBox, поместим в него изображение,
-        // добавим его на форму
         numch = NumCh(numch, 1);
         AddImg(numch);
         AddTxt(numch);
-        // Console.Write("{0} ", numch);
 	}
 
 	void MakeChs(object sender, EventArgs args) {
@@ -410,25 +391,20 @@ class Trax : Form {
         string strchs = "Artur " + arraych[numch];
         MessageBox.Show(strchs, "Ваш выбор:");
 
-		paneltabl.Visible = false;
+        window.Controls.Clear();
+		paneltxt.Controls.Clear();
 
         MakeChsPnl();
         MakeChsBtn();
-
-        // Console.Write("{0} ", numch);
 	}
 
 	void ClickL(object sender, EventArgs args) {
-		// ((Control) sender).Visible = false;
 		panelimg.Controls.Clear();
 		paneltxt.Controls.Clear();
 
-        // Создадим элемент PictureBox, поместим в него изображение,
-        // добавим его на форму
         numch = NumCh(numch, -1);
         AddImg(numch);
         AddTxt(numch);
-        // Console.Write("{0} ", numch);
 	}
     
     int NumCh(int numch, int b) {
@@ -436,7 +412,7 @@ class Trax : Form {
         return numch;
     }
 
-	void MakeChsPnl(){
+	void MakeChsPnl() { // создание панели
 		mkchspnl = new TableLayoutPanel();
 		mkchspnl.AutoScroll = true;
 		mkchspnl.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -452,11 +428,11 @@ class Trax : Form {
 		window.Controls.Add(mkchspnl);
 	}
     
-	void MakeChsBtn() {
+	void MakeChsBtn() { // создание кнопок на mkchspnl
         btn = new Button();
 		btn.Dock = DockStyle.Fill;
-        btn.Font = new Font("Arial", btn.Width*2);
-        btn.Text = "<-";
+        btn.Font = new Font("Arial", btn.Width/2);
+        btn.Text = "change the character\n\r<-";
         btn.BackColor = Color.FromArgb(230, 200, 200);
         btn.ForeColor = Color.FromArgb(90, 50, 50);
         mkchspnl.Controls.Add(btn, 0, 1);
@@ -465,8 +441,8 @@ class Trax : Form {
         Button btnr;
         btnr = new Button();
 		btnr.Dock = DockStyle.Fill;
-        btnr.Font = new Font("Arial", btnr.Width*2);
-        btnr.Text = "->";
+        btnr.Font = new Font("Arial", btnr.Width/2);
+        btnr.Text = "continue\n\r->";
         btnr.BackColor = Color.FromArgb(200, 230, 200);
         btnr.ForeColor = Color.FromArgb(50, 90, 50);
         mkchspnl.Controls.Add(btnr, 1, 1);
@@ -475,7 +451,33 @@ class Trax : Form {
     
     void DngPnl(object sender, EventArgs args) {
         window.Controls.Clear();
-        // Добавляем панель для размещения остальных элементов управления
+		window.Controls.Add(paneldng);
+        
+        paneldng.Controls.Clear();
+        
+		paneldng.Controls.Add(panelimg, 0, 1);
+		paneldng.Controls.Add(paneldnglbl, 0, 3); // создание textbox и button
+        // if (endpnl.Visible == true) {
+        //     endpnl.Visible = false;
+        // }
+        // button.Visible = false;
+        // paneldng.RowStyles.Clear();
+        // paneldng.ColumnStyles.Clear();
+
+        prt = ""; prt1 = "";
+
+        button = new Button();
+		button.Dock = DockStyle.Fill;
+        button.Font = new Font("Arial", button.Width/2);
+        button.Text = "Выполнить!";
+        button.BackColor = Color.Green;
+        button.ForeColor = Color.White;
+        paneldng.Controls.Add(button, 0, 5);
+        button.Click += new EventHandler(button_Click1);
+
+    }
+    
+    void paneldngpnl() { // создание панели
 		paneldng = new TableLayoutPanel ();
 		paneldng.AutoScroll = true;
 		paneldng.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -492,23 +494,43 @@ class Trax : Form {
 		paneldng.RowStyles.Add (new RowStyle (SizeType.Percent, 3F));
 		paneldng.TabIndex = 0;
         paneldng.BackColor = Color.FromArgb(240, 245, 240);
-		window.Controls.Add(paneldng);
+    }
 
-        button = new Button();
-		button.Dock = DockStyle.Fill;
-        button.Font = new Font("Arial", button.Width/2);
-        button.Text = "Выполнить!";
-        button.BackColor = Color.Green;
-        button.ForeColor = Color.White;
-        paneldng.Controls.Add(button, 0, 5);
-        button.Click += new EventHandler(button_Click1);
+    void DngPnlLbl() {
+        
+        textBox1 = new TextBox();
+        textBox1.Multiline = true;
+        textBox1.Text = "огурцом";
+        textBox1.Font = new Font("Times New Roman", 20);
+        textBox1.Dock = DockStyle.Fill;
+        paneldnglbl.Controls.Add(textBox1, 1, 0);
+        
+        textBox2 = new TextBox();
+        textBox2.Multiline = true;
+        textBox2.Text = "трахнуть";
+        textBox2.Font = new Font("Times New Roman", 20);
+        textBox2.Dock = DockStyle.Fill;
+        paneldnglbl.Controls.Add(textBox2, 3, 0);
+        
+        textBox3 = new TextBox();
+        textBox3.Multiline = true;
+        textBox3.Text = "анал";
+        textBox3.Font = new Font("Times New Roman", 20);
+        textBox3.Dock = DockStyle.Fill;
+        paneldnglbl.Controls.Add(textBox3, 5, 0);
+        
+        PictureBox imagepng = new PictureBox();
+        imagepng.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap imagechpng = new Bitmap("img/plus2.png");
+		imagepng.Dock = DockStyle.Fill;
+        imagepng.Image = (Image)imagechpng;
+        imagepng.Click += new EventHandler(plusclick);
+        paneldnglbl.Controls.Add(imagepng, 7, 0);
 
-        DngPnlLbl();
-		paneldng.Controls.Add(panelimg, 0, 1);
+        prt = ""; prt1 = "";
     }
     
-    void DngPnlLbl() { // панель с подписью
-        // Добавляем панель для размещения остальных элементов управления
+    void pnldngpnl() { // создание панели
 		paneldnglbl = new TableLayoutPanel ();
 		paneldnglbl.AutoScroll = true;
 		paneldnglbl.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -526,64 +548,6 @@ class Trax : Form {
 		paneldnglbl.RowCount = 1;
 		paneldnglbl.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
 		paneldnglbl.TabIndex = 0;
-        // paneldnglbl.BackColor = Color.FromArgb(215,220,210);
-		paneldng.Controls.Add(paneldnglbl, 0, 3);
-        
-        // Добавляем на панель текстовое поле
-        textBox1 = new TextBox();
-        textBox1.Multiline = true;
-        textBox1.Text = "огурцом";
-        textBox1.Font = new Font("Times New Roman", 20);
-        textBox1.Dock = DockStyle.Fill;
-        paneldnglbl.Controls.Add(textBox1, 1, 0);
-        
-        // Добавляем на панель текстовое поле
-        textBox2 = new TextBox();
-        textBox2.Multiline = true;
-        textBox2.Text = "трахнуть";
-        textBox2.Font = new Font("Times New Roman", 20);
-        textBox2.Dock = DockStyle.Fill;
-        paneldnglbl.Controls.Add(textBox2, 3, 0);
-        
-        // Добавляем на панель текстовое поле
-        textBox3 = new TextBox();
-        textBox3.Multiline = true;
-        textBox3.Text = "анал";
-        textBox3.Font = new Font("Times New Roman", 20);
-        textBox3.Dock = DockStyle.Fill;
-        paneldnglbl.Controls.Add(textBox3, 5, 0);
-        
-        PictureBox imagepng = new PictureBox();
-        imagepng.SizeMode = PictureBoxSizeMode.StretchImage;
-        Bitmap imagechpng = new Bitmap("img/plus2.png");
-		imagepng.Dock = DockStyle.Fill;
-        imagepng.Image = (Image)imagechpng;
-        imagepng.Click += new EventHandler(plusclick);
-        paneldnglbl.Controls.Add(imagepng, 7, 0);
-
-        prt = ""; prt1 = "";
-
-        // Label label3 = new Label();
-        // label3.Width = 2*textBox3.Width/5;
-        // Point[] plusArray = {
-        //     new Point(label3.Width/3, 0),
-        //     new Point(2*label3.Width/3, 0),
-        //     new Point(2*label3.Width/3, label3.Width/3),
-        //     new Point(label3.Width, label3.Width/3),
-        //     new Point(label3.Width, 2*label3.Width/3),
-        //     new Point(2*label3.Width/3, 2*label3.Width/3),
-        //     new Point(2*label3.Width/3, label3.Width),
-        //     new Point(label3.Width/3, label3.Width),
-        //     new Point(label3.Width/3, 2*label3.Width/3),
-        //     new Point(0, 2*label3.Width/3),
-        //     new Point(0, 1*label3.Width/3),
-        //     new Point(label3.Width/3, 1*label3.Width/3),
-        //     new Point(label3.Width/3, 0)};
-        // GraphicsPath plusPath = new GraphicsPath();
-        // plusPath.AddLines(plusArray);
-
-        // label3.Region = new Region(plusPath);
-        // plusPath.Dispose();
     }
     
     void button_Click1(object sender, EventArgs args) {
@@ -597,12 +561,15 @@ class Trax : Form {
 
         if (prt != "") {
             txt = prt + " и " + txt;
-            txt1 = prt1 + " и " + txt1 + " " + arraych[numch] + " Артура!";
+            txt1 = prt1 + " и " + txt1;
         }
         txt1 = "Вы "  + txt1 + " " + arraych[numch] + " Артура!";
         
-        paneldnglbl.Visible = false;
-        button.Visible = false;
+        // paneldnglbl.Visible = false;
+        // button.Visible = false;
+        paneldng.Controls.Clear();
+        
+		paneldng.Controls.Add(panelimg, 0, 1);
 
         button = new Button();
 		button.Dock = DockStyle.Fill;
@@ -613,8 +580,7 @@ class Trax : Form {
         paneldng.Controls.Add(button, 0, 3);
         button.Click += new EventHandler(cngtclick);
 
-        PanelEnd();
-        EndBtn();
+		paneldng.Controls.Add(endpnl, 0, 5);
     }
     
     void plusclick(object sender, EventArgs args) {
@@ -635,7 +601,7 @@ class Trax : Form {
         Convert.ToString(textBox3.Text);
     }
     
-	void PanelEnd(){
+	void PanelEnd() { // создание панели
 		endpnl = new TableLayoutPanel();
 		endpnl.AutoScroll = true;
 		endpnl.AutoSizeMode = AutoSizeMode.GrowAndShrink;
@@ -646,10 +612,9 @@ class Trax : Form {
 		endpnl.Dock = DockStyle.Fill;
 		endpnl.RowCount = 1;
 		endpnl.TabIndex = 0;
-		paneldng.Controls.Add(endpnl, 0, 5);
 	}
     
-	void EndBtn() {
+	void EndBtn() { // создание кнопок
         buttonred = new Button();
 		buttonred.Dock = DockStyle.Fill;
         buttonred.Font = new Font("Arial", buttonred.Width/2);
@@ -687,6 +652,7 @@ class Trax : Form {
         PanelCngt();
         CreatePanelCngt();
         PanelCngtLabel();
+        PanelCngtImage();
     }
 
     void CreatePanelCngt() {
@@ -707,7 +673,6 @@ class Trax : Form {
 		cngtpnl.Dock = DockStyle.Fill;
 		cngtpnl.AutoSizeMode = AutoSizeMode.GrowAndShrink;
 		cngtpnl.ColumnCount = 3;
-		cngtpnl.ColumnCount = 3;
 		cngtpnl.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 25F));
 		cngtpnl.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 50F));
 		cngtpnl.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 25F));
@@ -721,68 +686,104 @@ class Trax : Form {
 		cngtpnl.Dock = DockStyle.Fill;
 		cngtpnl.TabIndex = 0;
 		window.Controls.Add(cngtpnl);
-
-        PictureBox s_3 = new PictureBox();
-        s_3.SizeMode = PictureBoxSizeMode.StretchImage;
-        Bitmap mg3 = new Bitmap ("img/s-3.jpg");
-        s_3.Dock = DockStyle.Fill;;
-        s_3.Image = (Image)mg3;
-        cngtpnl.Controls.Add(s_3, 0, 0);
-
-        PictureBox s_4 = new PictureBox();
-        s_4.SizeMode = PictureBoxSizeMode.StretchImage;
-        Bitmap mg4 = new Bitmap ("img/s-4.jpg");
-        s_4.Dock = DockStyle.Fill;;
-        s_4.Image = (Image)mg4;
-        cngtpnl.Controls.Add(s_4, 1, 0);
-
-        PictureBox s_5 = new PictureBox();
-        s_5.SizeMode = PictureBoxSizeMode.StretchImage;
-        Bitmap mg5 = new Bitmap ("img/s-5.jpg");
-        s_5.Dock = DockStyle.Fill;;
-        s_5.Image = (Image)mg5;
-        cngtpnl.Controls.Add(s_5, 2, 0);
-
-        PictureBox s_6 = new PictureBox();
-        s_6.SizeMode = PictureBoxSizeMode.StretchImage;
-        Bitmap mg6 = new Bitmap ("img/hrt.png");
-        s_6.Dock = DockStyle.Fill;;
-        s_6.Image = (Image)mg6;
-        cngtpnl.Controls.Add(s_6, 0, 1);
-
-        PictureBox s_7 = new PictureBox();
-        s_7.SizeMode = PictureBoxSizeMode.StretchImage;
-        Bitmap mg7 = new Bitmap ("img/hrt.png");
-        s_7.Dock = DockStyle.Fill;;
-        s_7.Image = (Image)mg7;
-        cngtpnl.Controls.Add(s_7, 2, 1);
-
-        cngtpnl.Controls.Add(panelimg, 1, 1);
 	}
 
     void PanelCngtLabel() {
+        TableLayoutPanel labelendok = new TableLayoutPanel();
+		labelendok.AutoScroll = true;
+		labelendok.Dock = DockStyle.Fill;
+		labelendok.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		labelendok.ColumnCount = 1;
+		labelendok.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 100F));
+		labelendok.RowCount = 3;
+		labelendok.RowStyles.Add (new RowStyle (SizeType.Percent, 38F));
+		labelendok.RowStyles.Add (new RowStyle (SizeType.Percent, 2F));
+		labelendok.RowStyles.Add (new RowStyle (SizeType.Percent, 60F));
+		labelendok.Dock = DockStyle.Fill;
+		labelendok.TabIndex = 0;
+		cngtpnl.Controls.Add(labelendok, 1, 3);
+        
+        TableLayoutPanel labelendok1 = new TableLayoutPanel();
+		labelendok1.AutoScroll = true;
+		labelendok1.Dock = DockStyle.Fill;
+		labelendok1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+		labelendok1.ColumnCount = 3;
+		labelendok1.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 30F));
+		labelendok1.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 40F));
+		labelendok1.ColumnStyles.Add (new ColumnStyle(SizeType.Percent, 30F));
+		labelendok1.RowCount = 1;
+		labelendok1.RowStyles.Add (new RowStyle (SizeType.Percent, 100F));
+		labelendok1.Dock = DockStyle.Fill;
+		labelendok1.TabIndex = 0;
+		labelendok.Controls.Add(labelendok1, 0, 2);
 
+        Label label1 = new Label();
+        label1.Text = txt1;
+        label1.Dock = DockStyle.Fill;
+        label1.Font = new Font("Times New Roman", 3/2*label1.Width/(2 + (txt1.Length + 39)/40));
+        label1.ForeColor = Color.Green;
+        labelendok.Controls.Add(label1, 0, 0);
+
+        PictureBox s_8 = new PictureBox();
+        s_8.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap ok = new Bitmap ("img/ok.png");
+        s_8.Dock = DockStyle.Fill;
+        s_8.Image = (Image)ok;
+        s_8.Click += new EventHandler(End);
+        labelendok1.Controls.Add(s_8, 1, 0);
+	}
+
+    void PanelCngtImage() {
         PictureBox s = new PictureBox();
         s.SizeMode = PictureBoxSizeMode.StretchImage;
         Bitmap image5 = new Bitmap ("img/s.jpg");
-        s.Dock = DockStyle.Fill;;
+        s.Dock = DockStyle.Fill;
         s.Image = (Image)image5;
         cngtpnl.Controls.Add(s, 0, 3);
 
         PictureBox s_2 = new PictureBox();
         s_2.SizeMode = PictureBoxSizeMode.StretchImage;
         Bitmap image6 = new Bitmap ("img/s-2.jpg");
-        s_2.Dock = DockStyle.Fill;;
+        s_2.Dock = DockStyle.Fill;
         s_2.Image = (Image)image6;
         cngtpnl.Controls.Add(s_2, 2, 3);
 
-        Label label1 = new Label();
-        label1.Text = txt1;
-        label1.Dock = DockStyle.Fill;
-        label1.Font = new Font("Times New Roman", 3/2*label1.Width/(2 + (txt1.Length + 39)/40));
-        // label1.BackColor = Color.White;
-        label1.ForeColor = Color.Red;
-        cngtpnl.Controls.Add(label1, 1, 3);
+        PictureBox s_3 = new PictureBox();
+        s_3.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap mg3 = new Bitmap ("img/s-3.jpg");
+        s_3.Dock = DockStyle.Fill;
+        s_3.Image = (Image)mg3;
+        cngtpnl.Controls.Add(s_3, 0, 0);
+
+        PictureBox s_4 = new PictureBox();
+        s_4.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap mg4 = new Bitmap ("img/s-4.jpg");
+        s_4.Dock = DockStyle.Fill;
+        s_4.Image = (Image)mg4;
+        cngtpnl.Controls.Add(s_4, 1, 0);
+
+        PictureBox s_5 = new PictureBox();
+        s_5.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap mg5 = new Bitmap ("img/s-5.jpg");
+        s_5.Dock = DockStyle.Fill;
+        s_5.Image = (Image)mg5;
+        cngtpnl.Controls.Add(s_5, 2, 0);
+
+        PictureBox s_6 = new PictureBox();
+        s_6.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap mg6 = new Bitmap ("img/hrt.png");
+        s_6.Dock = DockStyle.Fill;
+        s_6.Image = (Image)mg6;
+        cngtpnl.Controls.Add(s_6, 0, 1);
+
+        PictureBox s_7 = new PictureBox();
+        s_7.SizeMode = PictureBoxSizeMode.StretchImage;
+        Bitmap mg7 = new Bitmap ("img/hrt.png");
+        s_7.Dock = DockStyle.Fill;
+        s_7.Image = (Image)mg7;
+        cngtpnl.Controls.Add(s_7, 2, 1);
+
+        cngtpnl.Controls.Add(panelimg, 1, 1);
 	}
 
     static void Main() {
