@@ -116,7 +116,6 @@ class Sapper : Form {
         Environment.Exit(0);
     }
 
-
     void label_inf() {
         Label label = new Label();
 		label.Dock = DockStyle.Top;
@@ -131,6 +130,7 @@ class Sapper : Form {
         thispnl.Controls.Add(label, 1, 1);
     }
 
+    
     void makeell() {
         cnt = 10;
         cntmn = 11*cnt/10;
@@ -152,8 +152,7 @@ class Sapper : Form {
         listpole = new List<List<int>>(); //динамический двумерный массив
         List<int> item = new List<int>(); //строка массива
  
-        for (int i = 0; i < cnt; i++)
-        {
+        for (int i = 0; i < cnt; i++) {
             item = new List<int>();
             for (int j = 0; j < cnt; j++)
                 item.Add(1); //строка массива заполняется просто суммой i и j
