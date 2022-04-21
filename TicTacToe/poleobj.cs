@@ -50,7 +50,7 @@ namespace supper {
             label.Click += new EventHandler(clicklabel);
             
             ImageList1 = new ImageList();
-            ImageList1.ImageSize = new Size(40, 40);
+            ImageList1.ImageSize = new Size(200, 250);
             ImageList1.Images.Add(Image.FromFile("img/tic.jpg"));
             ImageList1.Images.Add(Image.FromFile("img/tac.jpg"));
             Graphics theGraphics = Graphics.FromHwnd(this.Handle);
@@ -74,6 +74,7 @@ namespace supper {
             window.Controls.Add(paneltabl);
 
             createpole();
+            createlistpole();
         }
 
         void createpole() {
@@ -86,14 +87,23 @@ namespace supper {
         void addbutton(int row, int column) {
             Button button = new Button();
             button.Dock = DockStyle.Fill;
-            // button.Text = row.ToString();
-            // button.Click += new EventHandler(clickbutton);
+            button.Click += new EventHandler(clickbutton);
             paneltabl.Controls.Add(button, column, row);
+        }
+
+        void createlistpole() {
+            hod = 0;
+            listpole = new List<int>();
+                for (int j = 0; j < 9; j++)
+                    listpole.Add(0); //строка массива заполняется просто суммой i и j
         }
 
         private System.Windows.Forms.TableLayoutPanel thispnl; // на this
         private System.Windows.Forms.Panel window; // на thispnl
         private System.Windows.Forms.TableLayoutPanel paneltabl; // на window
         private System.Windows.Forms.ImageList ImageList1;
+        List<int> listpole;
+        PictureBox TicTac;
+        PictureBox TicTac1;
     }
 }

@@ -13,11 +13,17 @@ namespace supper {
     partial class Form1 {
         Int32 cnt;
         Int32 cntmn;
+        Int32 cntobj;
         Random rndm;
         List<List<int>> listpole;
+        bool flagchoice;
+        bool endgame;
         void randommines() {
             cnt = 10;
             cntmn = 11*cnt/10;
+            cntobj = cnt*cnt;
+            flagchoice = false;
+            endgame = true;
             Int32 X, Y;
             //Создание объекта для генерации чисел
             rndm = new Random();
@@ -26,7 +32,8 @@ namespace supper {
                 //Получаем случайное число
                 X = rndm.Next(cnt);
                 Y = rndm.Next()%cnt;
-                while(listpole[X][Y]/10 != 0) {
+                while(listpole[X][Y]/10 > 10) {
+                // while(listpole[X][Y]/10 != 0) {
                     X = rndm.Next(cnt);
                     Y = rndm.Next()%cnt;
                 }
@@ -36,23 +43,23 @@ namespace supper {
                     if (Y > 0) {
                         listpole[X - 1][Y - 1] += 10;
                     }
-                    if (Y < cnt - 2) {
+                    if (Y < cnt - 1) {
                         listpole[X - 1][Y + 1] += 10;
                     }
                 }
-                if (X < cnt - 2) {
+                if (X < cnt - 1) {
                     listpole[X + 1][Y] += 10;
                     if (Y > 0) {
                         listpole[X + 1][Y - 1] += 10;
                     }
-                    if (Y < cnt - 2) {
+                    if (Y < cnt - 1) {
                         listpole[X + 1][Y + 1] += 10;
                     }
                 }
                 if (Y > 0) {
                     listpole[X][Y - 1] += 10;
                 }
-                if (Y < cnt - 2) {
+                if (Y < cnt - 1) {
                     listpole[X][Y + 1] += 10;
                 }
                 

@@ -21,13 +21,17 @@ namespace supper {
             this.panel = new System.Windows.Forms.TableLayoutPanel(); // на thispnl
             this.paneltabl = new System.Windows.Forms.TableLayoutPanel(); // на window
             this.ImageList1 = new System.Windows.Forms.ImageList();
+            this.buttonpause = new System.Windows.Forms.Button();
+            this.buttonrestart = new System.Windows.Forms.Button();
             this.buttonexit = new System.Windows.Forms.Button();
             // this.SuspendLayout();
             // Указываем заголовок окна
             this.Name = "Form1";
             this.Text = "Sapper";
-            this.Height = 700; this.Width = 950;
-            // this.Width = 875;
+            // this.Height = 700;
+            // this.Width = 950;
+            this.Height = 720;
+            this.Width = 800;
             
             this.thispnl = new TableLayoutPanel();
             this.thispnl.ColumnCount = 2;
@@ -35,25 +39,27 @@ namespace supper {
             this.thispnl.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
             this.thispnl.Dock = DockStyle.Fill;
             this.thispnl.RowCount = 2;
-            this.thispnl.RowStyles.Add(new RowStyle(SizeType.Percent, 95F));
-            this.thispnl.RowStyles.Add(new RowStyle(SizeType.Percent, 5F));
+            this.thispnl.RowStyles.Add(new RowStyle(SizeType.Percent, 92F));
+            this.thispnl.RowStyles.Add(new RowStyle(SizeType.Percent, 8F));
 
             this.window = new Panel();
             this.window.Dock = DockStyle.Fill;
-            this.thispnl.Controls.Add(this.window, 0, 0);
+            window.BackColor = Color.FromArgb(160, 160, 160);
+            thispnl.Controls.Add(this.window, 0, 0);;
+            thispnl.SetColumnSpan(this.window, 2);
             
             Label label = new Label();
             label.Dock = DockStyle.Top;
             label.BorderStyle = BorderStyle.FixedSingle;
-            label.Height = this.Height/25;
-            label.Text = "Made by isabelle. (tap here)";
-            label.Font = new Font("Times New Roman", 10);
+            label.Height = 2*this.Height/28;
+            // label.Dock = DockStyle.Fill;
+            label.Text = "Made by isabelle.\n(tap here)";
+            label.Font = new Font("Times New Roman", 12);
             label.BackColor = Color.White;
             label.ForeColor = Color.Black;
             label.Click += new EventHandler(clicklabel);
             thispnl.Controls.Add(label, 1, 1);
             
-            flagchoice = false;
             ImageList1 = new ImageList();
             ImageList1.ImageSize = new Size(40, 40);
             ImageList1.Images.Add(Image.FromFile("img/fl.png"));
@@ -62,25 +68,43 @@ namespace supper {
             Graphics theGraphics = Graphics.FromHwnd(this.Handle);
             
             panel = new TableLayoutPanel();
-            panel.ColumnCount = 2;
-            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            panel.ColumnCount = 7;
+            for (int i = 0; i < panel.ColumnCount; i++)
+                panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F/panel.ColumnCount));
             panel.Dock = DockStyle.Fill;
-            panel.RowCount = 5;
-            panel.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            panel.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            panel.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            panel.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            panel.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            thispnl.Controls.Add(panel, 1, 0);
+            panel.RowCount = 1;
+            panel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            thispnl.Controls.Add(panel, 0, 1);
             
             buttonexit = new Button();
             buttonexit.Dock = DockStyle.Fill;
-            buttonexit.Font = new Font("Arial", buttonexit.Width/2);
+            // buttonexit.Font = new Font("Arial", buttonexit.Width/2);
+            buttonexit.Font = new Font("Arial", 15);
             buttonexit.Text = "exit";
             buttonexit.BackColor = Color.Red;
-            buttonexit.ForeColor = Color.FromArgb(250, 150, 150);
-            panel.Controls.Add(buttonexit, 0, 4);
+            // buttonexit.ForeColor = Color.FromArgb(250, 150, 150);
+            buttonexit.ForeColor = Color.White;
             buttonexit.Click += new EventHandler(end);
+            panel.Controls.Add(buttonexit, 0, 0);
+            
+            buttonrestart = new Button();
+            buttonrestart.Dock = DockStyle.Fill;
+            buttonrestart.Font = new Font("Arial", 14);
+            buttonrestart.Text = "restart";
+            buttonrestart.BackColor = Color.Magenta;
+            buttonrestart.ForeColor = Color.White;
+            // buttonrestart.Click += new EventHandler(restart);
+            panel.Controls.Add(buttonrestart, 1, 0);
+            
+            buttonpause = new Button();
+            buttonpause.Dock = DockStyle.Fill;
+            buttonpause.Font = new Font("Arial", 14);
+            buttonpause.Text = "pause";
+            buttonpause.BackColor = Color.Cyan;
+            buttonpause.ForeColor = Color.White;
+            // buttonpause.Click += new EventHandler(pause);
+            panel.Controls.Add(buttonpause, 2, 0);
+
             Button buttonflag = new Button();
             buttonflag.Dock = DockStyle.Fill;
             buttonflag.Click += new EventHandler(choiceflag);
@@ -88,7 +112,7 @@ namespace supper {
             buttonflag.BackgroundImageLayout = ImageLayout.Center;
             buttonflag.TabIndex = 1;
             buttonflag.TabStop = true;
-            panel.Controls.Add(buttonflag, 0, 1);
+            panel.Controls.Add(buttonflag, 3, 0);
             
             paneltabl = new TableLayoutPanel ();
             paneltabl.AutoScroll = true;
@@ -142,6 +166,7 @@ namespace supper {
             Button button = new Button();
             button.Dock = DockStyle.Fill;
             // button.Text = row.ToString();
+            button.BackColor = Color.FromArgb(240, 240, 240);
             button.Click += new EventHandler(clickbutton);
             paneltabl.Controls.Add(button, column, row);
         }
@@ -151,8 +176,9 @@ namespace supper {
         private System.Windows.Forms.TableLayoutPanel panel; // на thispnl
         private System.Windows.Forms.TableLayoutPanel paneltabl; // на window
         private System.Windows.Forms.ImageList ImageList1;
+        private System.Windows.Forms.Button buttonpause;
+        private System.Windows.Forms.Button buttonrestart;
         private System.Windows.Forms.Button buttonexit;
-        bool flagchoice = false;
         
         // private System.Windows.Forms.List<List<int>> listpole;
         // TableLayoutPanel thispnl; // на this
