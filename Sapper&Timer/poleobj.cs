@@ -93,7 +93,7 @@ namespace supper {
             buttonrestart.Text = "restart";
             buttonrestart.BackColor = Color.Magenta;
             buttonrestart.ForeColor = Color.White;
-            // buttonrestart.Click += new EventHandler(restart);
+            buttonrestart.Click += new EventHandler(restart);
             panel.Controls.Add(buttonrestart, 1, 0);
             
             buttonpause = new Button();
@@ -105,7 +105,7 @@ namespace supper {
             // buttonpause.Click += new EventHandler(pause);
             panel.Controls.Add(buttonpause, 2, 0);
 
-            Button buttonflag = new Button();
+            buttonflag = new Button();
             buttonflag.Dock = DockStyle.Fill;
             buttonflag.Click += new EventHandler(choiceflag);
             buttonflag.BackgroundImage = ImageList1.Images[0];
@@ -179,6 +179,7 @@ namespace supper {
         private System.Windows.Forms.Button buttonpause;
         private System.Windows.Forms.Button buttonrestart;
         private System.Windows.Forms.Button buttonexit;
+        private System.Windows.Forms.Button buttonflag;
         
         // private System.Windows.Forms.List<List<int>> listpole;
         // TableLayoutPanel thispnl; // на this

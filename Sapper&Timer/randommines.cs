@@ -19,15 +19,9 @@ namespace supper {
         bool flagchoice;
         bool endgame;
         void randommines() {
-            cnt = 10;
-            cntmn = 11*cnt/10;
-            cntobj = cnt*cnt;
-            flagchoice = false;
-            endgame = true;
             Int32 X, Y;
             //Создание объекта для генерации чисел
             rndm = new Random();
-            createlistpole();
             for (int i = 0; i < cntmn; i++) {
                 //Получаем случайное число
                 X = rndm.Next(cnt);
@@ -68,6 +62,11 @@ namespace supper {
             }
         }
         void createlistpole() {
+            cnt = 10;
+            cntmn = 11*cnt/10;
+            cntobj = cnt*cnt;
+            flagchoice = false;
+            endgame = true;
             listpole = new List<List<int>>(); //динамический двумерный массив
             List<int> item = new List<int>(); //строка массива
             for (int i = 0; i < cnt; i++) {

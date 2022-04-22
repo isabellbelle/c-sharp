@@ -12,6 +12,7 @@ using System.Threading;
 namespace supper {
     public partial class Form1 : Form {
         public Form1() {
+            createlistpole();
             randommines();
             InitializeComponent();
         }
@@ -24,7 +25,7 @@ namespace supper {
         // нажатие buttonflag на panelbutton
         void choiceflag(object sender, EventArgs args) {
             flagchoice = !flagchoice;
-            var buttonflag = (Button)sender;
+            // var buttonflag = (Button)sender;
             if (flagchoice == true) {
                 buttonflag.BackColor = Color.FromArgb(150, 200, 150);
             } else {
@@ -42,7 +43,7 @@ namespace supper {
                 if (listpole[X][Y] > 0)
                     choisesqr(X, Y);
             }
-            if (cntobj == 0 && endgame == true) {    
+            if (cntobj - cntmn == 0 && endgame == true) {    
                 MessageBox.Show ("You win!", "Game over!");
             }
         }
@@ -78,96 +79,142 @@ namespace supper {
             // button.Click += new System.EventHandler(this.button1_Click);
             // button.Click += new System.EventHandler(this.button1_Click);
         }
-
-        // завершение программы
-        void end(object sender, EventArgs args) {
-            Environment.Exit(0);
-        }
     
         Int32 choisesqr(Int32 X, Int32 Y) {
             // ((Control)sender).Visible = false;
-        Int32 count = 0;
-        Int32 a = 0, b = 0, c = 0, d = 0;
-        cntobj -= 1;
-        // object sender1;
-        paneltabl.GetControlFromPosition(X, Y).Visible = false;
-        if (listpole[X][Y]/10 < 10) {
-            if (listpole[X][Y]/10 != 0) {
-                PictureBox TicTac1 = new PictureBox();
-                TicTac1.Image = Image.FromFile("img/" + listpole[X][Y]/10 + ".png");
-                TicTac1.SizeMode = PictureBoxSizeMode.StretchImage;
-                TicTac1.Dock = DockStyle.Fill;
-                paneltabl.Controls.Add(TicTac1, X, Y);
-                listpole[X][Y] = 0;
-                count = 1;
+            Int32 count = 0;
+            Int32 a = 0, b = 0, c = 0, d = 0;
+            cntobj -= 1;
+            // object sender1;
+            paneltabl.GetControlFromPosition(X, Y).Dispose();
+            // paneltabl.GetControlFromPosition(X, Y).Visible = false;
+            if (listpole[X][Y]/10 < 10) {
+                if (listpole[X][Y]/10 != 0) {
+                    PictureBox TicTac1 = new PictureBox();
+                    TicTac1.Image = Image.FromFile("img/" + listpole[X][Y]/10 + ".png");
+                    TicTac1.SizeMode = PictureBoxSizeMode.StretchImage;
+                    TicTac1.Dock = DockStyle.Fill;
+                    paneltabl.Controls.Add(TicTac1, X, Y);
+                    listpole[X][Y] = -200;
+                    count = 1;
+                } else {
+                    listpole[X][Y] = 0;
+                    if (X > 0 && listpole[X - 1][Y] > 0) {
+                        a = choisesqr(X - 1, Y);
+                    }
+                    if (X < cnt - 1 && listpole[X + 1][Y] > 0) {
+                        b = choisesqr(X + 1, Y);
+                    }
+                    if (Y > 0 && listpole[X][Y - 1] > 0) {
+                        c = choisesqr(X, Y - 1);
+                    }
+                    if (Y < cnt - 1 && listpole[X][Y + 1] > 0) {
+                        d = choisesqr(X, Y + 1);
+                    }
+
+                    if (X > 0 && Y > 0 && listpole[X - 1][Y - 1] > 0) {
+                        choisesqr(X - 1, Y - 1);
+                    }
+                    if (X > 0 && Y < cnt - 1 && listpole[X - 1][Y + 1] > 0) {
+                        choisesqr(X - 1, Y + 1);
+                    }
+                    if (X < cnt - 1 && Y > 0 && listpole[X + 1][Y - 1] > 0) {
+                        choisesqr(X + 1, Y - 1);
+                    }
+                    if (X < cnt - 1 && Y < cnt - 1 && listpole[X + 1][Y + 1] > 0) {
+                        choisesqr(X + 1, Y + 1);
+                    }
+                }
             } else {
-                listpole[X][Y] = 0;
-                if (X > 0 && listpole[X - 1][Y] > 0) {
-                    a = choisesqr(X - 1, Y);
-                }
-                if (X < cnt - 1 && listpole[X + 1][Y] > 0) {
-                    b = choisesqr(X + 1, Y);
-                }
-                if (Y > 0 && listpole[X][Y - 1] > 0) {
-                    c = choisesqr(X, Y - 1);
-                }
-                if (Y < cnt - 1 && listpole[X][Y + 1] > 0) {
-                    d = choisesqr(X, Y + 1);
-                }
+                if (listpole[X][Y] >= 100) {
+                    listpole[X][Y] = -200;
+                    // var button = (Button)sender;
+                    // Int32 j = 1;
+                    TimeSpan interval = new TimeSpan(0, 0, 2);
+                    // var button = (Button)sender;
+                    // button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+                    // button.BackgroundImage = ImageList1.Images[2];
+                    // button.BackgroundImageLayout = ImageLayout.Center;
+                    // button.TabStop = true;
+                    // button.Dock = DockStyle.Fill;
 
-                if (X > 0 && Y > 0 && listpole[X - 1][Y - 1] > 0) {
-                    choisesqr(X - 1, Y - 1);
-                }
-                if (X > 0 && Y < cnt - 1 && listpole[X - 1][Y + 1] > 0) {
-                    choisesqr(X - 1, Y + 1);
-                }
-                if (X < cnt - 1 && Y > 0 && listpole[X + 1][Y - 1] > 0) {
-                    choisesqr(X + 1, Y - 1);
-                }
-                if (X < cnt - 1 && Y < cnt - 1 && listpole[X + 1][Y + 1] > 0) {
-                    choisesqr(X + 1, Y + 1);
-                }
-            }
-            // paneltabl.Controls.Add(TicTac1, 1, 1);
-            if (X > 0) {
-                // sender1.Location = new Point(X - 1, Y);
-                // X = paneltabl.GetColumn((Control)sender);
-                // Y = paneltabl.GetRow((Control)sender);
-                // a = choisesqr(X - 1, Y, sender1);
-            }
-        } else {
-            if (listpole[X][Y] >= 100) {
-                // var button = (Button)sender;
-                // Int32 j = 1;
-                TimeSpan interval = new TimeSpan(0, 0, 2);
-                // var button = (Button)sender;
-                // button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                // button.BackgroundImage = ImageList1.Images[2];
-                // button.BackgroundImageLayout = ImageLayout.Center;
-                // button.TabStop = true;
-                // button.Dock = DockStyle.Fill;
-                PictureBox TicTac1 = new PictureBox();
-                TicTac1.Image = ImageList1.Images[2];
-                paneltabl.BackgroundImageLayout = ImageLayout.Center;
-                Button button = new Button();
-                button.Dock = DockStyle.Fill;
-                paneltabl.Controls.Add(button, X, Y);
-                button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                button.BackgroundImage = ImageList1.Images[2];
-                button.BackgroundImageLayout = ImageLayout.Center;
-                button.TabStop = true;
-                button.Dock = DockStyle.Fill;
-                // paneltabl.Controls.Add(TicTac1, X, Y);
+                    Button button = new Button();
+                    button.Dock = DockStyle.Fill;
+                    paneltabl.Controls.Add(button, X, Y);
+                    // Thread.Sleep(2000);
+                    // addpic(button);
 
-                MessageBox.Show("Game Over.", "Attention!");
-                listpole[X][Y] = 0;
+                    // paneltabl.Controls.Add(TicTac1, X, Y);
+                    // addmine(button);
+
+                    endgame = false;
+                    // Thread.Sleep(2000);
+                    // picnull(button);
+                    // Thread.Sleep(2000);
+                    addpic(button);
+                    MessageBox.Show("Game Over.", "Attention!");
+                    // Thread.Sleep(2000);
+                    showmines();
+                    // window.Controls.Clear();
+                }
             }
+            return count;
+        }
+        void picnull(object button1) {
+            Thread.Sleep(2000);
+            var button = (Button)button1;
+            button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            button.BackgroundImage = null;
+            button.BackgroundImageLayout = ImageLayout.Center;
+            button.TabIndex = 1;
+            button.TabStop = true;
+            button.Dock = DockStyle.Fill;
+            Thread.Sleep(2000);
+        }
+        void addpic(object button1) {
+            // Thread.Sleep(2000);
+            // var button = (Button)paneltabl.GetControlFromPosition(X, Y);
+            var button = (Button)button1;
+            button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            button.BackgroundImage = ImageList1.Images[2];
+            button.BackgroundImageLayout = ImageLayout.Center;
+            button.TabIndex = 1;
+            button.TabStop = true;
+            button.Dock = DockStyle.Fill;
+            // Thread.Sleep(2000);
+        }
+        void addmine(object button1) {
+            Thread.Sleep(2000);
+            var button = (Button)button1;
+            button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            button.BackgroundImage = ImageList1.Images[1];
+            button.BackgroundImageLayout = ImageLayout.Center;
+            button.TabIndex = 1;
+            button.TabStop = true;
+            button.Dock = DockStyle.Fill;
+            Thread.Sleep(2000);
         }
 
 
-            // var form = button.FindForm();
-        return count;
-        }
         
+        void funct() {}
+
+        void showmines() {
+            for (int i = 0; i < cnt; i++) {
+                for (int j = 0; j < cnt; j++) {
+                    if (listpole[i][j]/10 >= 10) {
+                        listpole[i][j] = -200;
+                        Button button = (Button)paneltabl.GetControlFromPosition(i, j);
+                        // Button button1 = (Button)button;
+                        button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+                        button.BackgroundImage = ImageList1.Images[1];
+                        button.BackgroundImageLayout = ImageLayout.Center;
+                        button.TabIndex = 1;
+                        button.TabStop = true;
+                        button.Dock = DockStyle.Fill;
+                    }
+                }
+            }
+        }
     }
 }
