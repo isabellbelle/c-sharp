@@ -11,7 +11,10 @@ using System.Drawing.Drawing2D;
 
 namespace supper {
     partial class Form1 {
-        void pause(object sender, EventArgs args) {}
+        void pause(object sender, EventArgs args) {
+            // остановка таймера
+            timer1.Stop();
+        }
 
         void restart(object sender, EventArgs args) {
             cnt = 10;
@@ -38,6 +41,10 @@ namespace supper {
         // завершение программы
         void end(object sender, EventArgs args) {
             Environment.Exit(0);
+        }
+
+        void gameover() {
+            paneltabl.Visible = false;
         }
     }
 }

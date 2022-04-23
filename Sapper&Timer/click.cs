@@ -12,9 +12,26 @@ using System.Threading;
 namespace supper {
     public partial class Form1 : Form {
         public Form1() {
+            sec = 40;
+            cnt = 10;
+            cntmn = 11*cnt/10;
+            cntobj = cnt*cnt;
+            createlabel();
+            createbgnpnl();
+            // InitializeComponent();
+            // createbgnpnl();
+            // sec = 40;
+            // cnt = 10;
+            // cntmn = 11*cnt/10;
+            // cntobj = cnt*cnt;
+            // createlistpole();
+            // randommines();
+            // addcomponent();
+            // timerchoice(1);
+            // InitializeComponent();
+            // addcomponent();
             createlistpole();
             randommines();
-            InitializeComponent();
         }
 
         // получение ссылки на github
@@ -43,8 +60,10 @@ namespace supper {
                 if (listpole[X][Y] > 0)
                     choisesqr(X, Y);
             }
-            if (cntobj - cntmn == 0 && endgame == true) {    
+            if (cntobj - cntmn == 0 && endgame == true) {
+                timer1.Stop();
                 MessageBox.Show ("You win!", "Game over!");
+                gameover();
             }
         }
 
@@ -128,33 +147,22 @@ namespace supper {
             } else {
                 if (listpole[X][Y] >= 100) {
                     listpole[X][Y] = -200;
-                    // var button = (Button)sender;
-                    // Int32 j = 1;
-                    TimeSpan interval = new TimeSpan(0, 0, 2);
-                    // var button = (Button)sender;
-                    // button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                    // button.BackgroundImage = ImageList1.Images[2];
-                    // button.BackgroundImageLayout = ImageLayout.Center;
-                    // button.TabStop = true;
-                    // button.Dock = DockStyle.Fill;
 
                     Button button = new Button();
                     button.Dock = DockStyle.Fill;
                     paneltabl.Controls.Add(button, X, Y);
-                    // Thread.Sleep(2000);
-                    // addpic(button);
-
-                    // paneltabl.Controls.Add(TicTac1, X, Y);
-                    // addmine(button);
 
                     endgame = false;
+                    // TimeSpan interval = new TimeSpan(0, 0, 2);
                     // Thread.Sleep(2000);
                     // picnull(button);
                     // Thread.Sleep(2000);
                     addpic(button);
+                    timer1.Stop();
                     MessageBox.Show("Game Over.", "Attention!");
                     // Thread.Sleep(2000);
                     showmines();
+                    gameover();
                     // window.Controls.Clear();
                 }
             }

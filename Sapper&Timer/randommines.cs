@@ -11,9 +11,6 @@ using System.Drawing.Drawing2D;
 
 namespace supper {
     partial class Form1 {
-        Int32 cnt;
-        Int32 cntmn;
-        Int32 cntobj;
         Random rndm;
         List<List<int>> listpole;
         bool flagchoice;
@@ -62,9 +59,6 @@ namespace supper {
             }
         }
         void createlistpole() {
-            cnt = 10;
-            cntmn = 11*cnt/10;
-            cntobj = cnt*cnt;
             flagchoice = false;
             endgame = true;
             listpole = new List<List<int>>(); //динамический двумерный массив

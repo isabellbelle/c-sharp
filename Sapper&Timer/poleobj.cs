@@ -16,6 +16,7 @@ namespace supper {
         private void InitializeComponent() {
             // this.components = new System.ComponentModel.Container();
             // this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer1 = new System.Windows.Forms.Timer();
             this.thispnl = new System.Windows.Forms.TableLayoutPanel(); // на this
             this.window = new System.Windows.Forms.Panel(); // на thispnl
             this.panel = new System.Windows.Forms.TableLayoutPanel(); // на thispnl
@@ -26,6 +27,9 @@ namespace supper {
             this.buttonexit = new System.Windows.Forms.Button();
             // this.SuspendLayout();
             // Указываем заголовок окна
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+
             this.Name = "Form1";
             this.Text = "Sapper";
             // this.Height = 700;
@@ -45,19 +49,20 @@ namespace supper {
             this.window = new Panel();
             this.window.Dock = DockStyle.Fill;
             window.BackColor = Color.FromArgb(160, 160, 160);
-            thispnl.Controls.Add(this.window, 0, 0);;
+            thispnl.Controls.Add(this.window, 0, 0);
             thispnl.SetColumnSpan(this.window, 2);
             
-            Label label = new Label();
-            label.Dock = DockStyle.Top;
-            label.BorderStyle = BorderStyle.FixedSingle;
-            label.Height = 2*this.Height/28;
+            // label = new Button();
+            // label.Dock = DockStyle.Top;
+            // // label.BorderStyle = BorderStyle.FixedSingle;
+            // label.Height = 2*this.Height/28;
             // label.Dock = DockStyle.Fill;
-            label.Text = "Made by isabelle.\n(tap here)";
-            label.Font = new Font("Times New Roman", 12);
-            label.BackColor = Color.White;
-            label.ForeColor = Color.Black;
-            label.Click += new EventHandler(clicklabel);
+            // label.Text = "Made by isabelle.(tap here)";
+            // // label.Text = "Made by isabelle.\n(tap here)";
+            // label.Font = new Font("Times New Roman", 12);
+            // label.BackColor = Color.White;
+            // label.ForeColor = Color.Black;
+            // label.Click += new EventHandler(clicklabel);
             thispnl.Controls.Add(label, 1, 1);
             
             ImageList1 = new ImageList();
@@ -102,7 +107,7 @@ namespace supper {
             buttonpause.Text = "pause";
             buttonpause.BackColor = Color.Cyan;
             buttonpause.ForeColor = Color.White;
-            // buttonpause.Click += new EventHandler(pause);
+            buttonpause.Click += new EventHandler(pause);
             panel.Controls.Add(buttonpause, 2, 0);
 
             buttonflag = new Button();
@@ -127,33 +132,29 @@ namespace supper {
             paneltabl.TabIndex = 0;
             window.Controls.Add(paneltabl);
             createpole();
-
          
             // this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             // this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             // this.ClientSize = new System.Drawing.Size(300, 253);
             this.Controls.Add(this.thispnl);
 
-            // this.Controls.Add(this.button3);
-            // this.Controls.Add(this.button2);
-            // this.Controls.Add(this.button1);
-            // this.Controls.Add(this.label8);
-            // this.Controls.Add(this.label7);
-            // this.Controls.Add(this.label6);
-            // this.Controls.Add(this.textBox3);
-            // this.Controls.Add(this.textBox2);
-            // this.Controls.Add(this.textBox1);
-            // this.Controls.Add(this.label5);
-            // this.Controls.Add(this.label4);
-            // this.Controls.Add(this.label3);
-            // this.Controls.Add(this.label2);
-            // this.Controls.Add(this.label1);
-            // this.Name = "Form1";
-            // this.Text = "Таймер";
-            
             // this.ResumeLayout(false);
             // this.PerformLayout();
         }
+
+        void createlabel() {
+            label = new Button();
+            label.Dock = DockStyle.Top;
+            // label.BorderStyle = BorderStyle.FixedSingle;
+            label.Height = 2*this.Height/28;
+            label.Dock = DockStyle.Fill;
+            label.Text = "Made by isabelle.(tap here)";
+            // label.Text = "Made by isabelle.\n(tap here)";
+            label.Font = new Font("Times New Roman", 12);
+            label.BackColor = Color.White;
+            label.ForeColor = Color.Black;
+            label.Click += new EventHandler(clicklabel);
+            }
 
         void createpole() {
             for (int i = 0; i < cnt; i++) {
@@ -163,6 +164,8 @@ namespace supper {
         }
         
         void addbutton(int row, int column) {
+            // this.Height = 720;
+            // this.Width = 800;
             Button button = new Button();
             button.Dock = DockStyle.Fill;
             // button.Text = row.ToString();
@@ -171,36 +174,16 @@ namespace supper {
             paneltabl.Controls.Add(button, column, row);
         }
 
+        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.TableLayoutPanel thispnl; // на this
         private System.Windows.Forms.Panel window; // на thispnl
         private System.Windows.Forms.TableLayoutPanel panel; // на thispnl
         private System.Windows.Forms.TableLayoutPanel paneltabl; // на window
+        private System.Windows.Forms.Button label;
         private System.Windows.Forms.ImageList ImageList1;
         private System.Windows.Forms.Button buttonpause;
         private System.Windows.Forms.Button buttonrestart;
         private System.Windows.Forms.Button buttonexit;
         private System.Windows.Forms.Button buttonflag;
-        
-        // private System.Windows.Forms.List<List<int>> listpole;
-        // TableLayoutPanel thispnl; // на this
-        // Panel window; // на thispnl
-        // TableLayoutPanel panel; // на thispnl
-        // TableLayoutPanel paneltabl; // на window
-        // private System.Windows.Forms.Timer timer1;
-        // private System.Windows.Forms.Label label1;
-        // private System.Windows.Forms.Label label2;
-        // private System.Windows.Forms.Label label3;
-        // private System.Windows.Forms.Label label4;
-        // private System.Windows.Forms.Label label5;
-        // private System.Windows.Forms.TextBox textBox1;
-        // private System.Windows.Forms.TextBox textBox2;
-        // private System.Windows.Forms.TextBox textBox3;
-        // private System.Windows.Forms.Label label6;
-        // private System.Windows.Forms.Label label7;
-        // private System.Windows.Forms.Label label8;
-        // private System.Windows.Forms.Button button1;
-        // private System.Windows.Forms.Button button2;
-        // private System.Windows.Forms.Button button3;
-
     }
 }
