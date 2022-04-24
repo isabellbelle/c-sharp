@@ -22,9 +22,10 @@ namespace supper {
             this.panel = new System.Windows.Forms.TableLayoutPanel(); // на thispnl
             this.paneltabl = new System.Windows.Forms.TableLayoutPanel(); // на window
             this.ImageList1 = new System.Windows.Forms.ImageList();
-            this.buttonpause = new System.Windows.Forms.Button();
-            this.buttonrestart = new System.Windows.Forms.Button();
-            this.buttonexit = new System.Windows.Forms.Button();
+            // this.buttonpause = new System.Windows.Forms.Button();
+            // this.buttonrestart = new System.Windows.Forms.Button();
+            // this.buttonexit = new System.Windows.Forms.Button();
+            labeltime = new System.Windows.Forms.Label();
             // this.SuspendLayout();
             // Указываем заголовок окна
             this.timer1.Interval = 1000;
@@ -52,17 +53,7 @@ namespace supper {
             thispnl.Controls.Add(this.window, 0, 0);
             thispnl.SetColumnSpan(this.window, 2);
             
-            // label = new Button();
-            // label.Dock = DockStyle.Top;
-            // // label.BorderStyle = BorderStyle.FixedSingle;
-            // label.Height = 2*this.Height/28;
-            // label.Dock = DockStyle.Fill;
-            // label.Text = "Made by isabelle.(tap here)";
-            // // label.Text = "Made by isabelle.\n(tap here)";
-            // label.Font = new Font("Times New Roman", 12);
-            // label.BackColor = Color.White;
-            // label.ForeColor = Color.Black;
-            // label.Click += new EventHandler(clicklabel);
+            createlabel();
             thispnl.Controls.Add(label, 1, 1);
             
             ImageList1 = new ImageList();
@@ -154,7 +145,7 @@ namespace supper {
             label.BackColor = Color.White;
             label.ForeColor = Color.Black;
             label.Click += new EventHandler(clicklabel);
-            }
+        }
 
         void createpole() {
             for (int i = 0; i < cnt; i++) {
@@ -185,5 +176,6 @@ namespace supper {
         private System.Windows.Forms.Button buttonrestart;
         private System.Windows.Forms.Button buttonexit;
         private System.Windows.Forms.Button buttonflag;
+        private System.Windows.Forms.Label labeltime;
     }
 }

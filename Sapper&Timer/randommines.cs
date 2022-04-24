@@ -15,7 +15,7 @@ namespace supper {
         List<List<int>> listpole;
         bool flagchoice;
         bool endgame;
-        void randommines() {
+        void randommines(Int32 X1, Int32 Y1) {
             Int32 X, Y;
             //Создание объекта для генерации чисел
             rndm = new Random();
@@ -23,7 +23,7 @@ namespace supper {
                 //Получаем случайное число
                 X = rndm.Next(cnt);
                 Y = rndm.Next()%cnt;
-                while(listpole[X][Y]/10 > 10) {
+                while(listpole[X][Y]/10 >= 10 || (X == X1 && Y == Y1)) {
                 // while(listpole[X][Y]/10 != 0) {
                     X = rndm.Next(cnt);
                     Y = rndm.Next()%cnt;
@@ -53,10 +53,8 @@ namespace supper {
                 if (Y < cnt - 1) {
                     listpole[X][Y + 1] += 10;
                 }
-                
-                //Вывод полученного числа в консоль
-                // Console.WriteLine("{0} {1}", X, Y);
             }
+            choisesqr(X1, Y1);
         }
         void createlistpole() {
             flagchoice = false;

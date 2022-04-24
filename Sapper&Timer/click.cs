@@ -12,10 +12,6 @@ using System.Threading;
 namespace supper {
     public partial class Form1 : Form {
         public Form1() {
-            sec = 40;
-            cnt = 10;
-            cntmn = 11*cnt/10;
-            cntobj = cnt*cnt;
             createlabel();
             createbgnpnl();
             // InitializeComponent();
@@ -31,7 +27,7 @@ namespace supper {
             // InitializeComponent();
             // addcomponent();
             createlistpole();
-            randommines();
+            // randommines();
         }
 
         // получение ссылки на github
@@ -41,36 +37,44 @@ namespace supper {
         
         // нажатие buttonflag на panelbutton
         void choiceflag(object sender, EventArgs args) {
-            flagchoice = !flagchoice;
-            // var buttonflag = (Button)sender;
-            if (flagchoice == true) {
-                buttonflag.BackColor = Color.FromArgb(150, 200, 150);
-            } else {
-                buttonflag.BackColor = Color.Transparent;
+            if (!timer1stop) {
+                flagchoice = !flagchoice;
+                // var buttonflag = (Button)sender;
+                if (flagchoice == true) {
+                    buttonflag.BackColor = Color.FromArgb(150, 200, 150);
+                } else {
+                    buttonflag.BackColor = Color.Transparent;
+                }
             }
         }
 
         // добавление флага на кнопку
         void clickbutton(object sender, EventArgs args) {
-            if (flagchoice == true) {
-                addflag(sender);
-            } else {
-                Int32 X = paneltabl.GetColumn((Control)sender),
-                Y = paneltabl.GetRow((Control)sender);
-                if (listpole[X][Y] > 0)
-                    choisesqr(X, Y);
+            if (fstep) {
+                randommines(paneltabl.GetColumn((Control)sender),
+                paneltabl.GetRow((Control)sender));
+                fstep = !fstep;
             }
-            if (cntobj - cntmn == 0 && endgame == true) {
-                timer1.Stop();
-                MessageBox.Show ("You win!", "Game over!");
-                gameover();
+            if (!timer1stop && !fstep) {
+                if (flagchoice == true) {
+                    addflag(sender);
+                } else {
+                    Int32 X = paneltabl.GetColumn((Control)sender),
+                    Y = paneltabl.GetRow((Control)sender);
+                    if (listpole[X][Y] > 0)
+                        choisesqr(X, Y);
+                }
+                if (cntobj - cntmn == 0 && endgame == true) {
+                    timer1.Stop();
+                    // MessageBox.Show ("You win!", "Game over!");
+                    gameover("You win!");
+                }
             }
         }
 
         void addflag(object sender) {
             Int32 X = paneltabl.GetColumn((Control)sender),
             Y = paneltabl.GetRow((Control)sender);
-            // Console.Write("{0} {1}", X, Y);
             var button = (Button)sender;
             if(listpole[X][Y] < 0) { // проверка на наличие флага на кнопке
                 cntmn += 1;
@@ -93,20 +97,13 @@ namespace supper {
                     MessageBox.Show("The maximum number of flags has been exceeded.", "Attention!");
                 }
             }
-            // Console.Write(cntmn);
-
-            // button.Click += new System.EventHandler(this.button1_Click);
-            // button.Click += new System.EventHandler(this.button1_Click);
         }
     
         Int32 choisesqr(Int32 X, Int32 Y) {
-            // ((Control)sender).Visible = false;
             Int32 count = 0;
             Int32 a = 0, b = 0, c = 0, d = 0;
             cntobj -= 1;
-            // object sender1;
             paneltabl.GetControlFromPosition(X, Y).Dispose();
-            // paneltabl.GetControlFromPosition(X, Y).Visible = false;
             if (listpole[X][Y]/10 < 10) {
                 if (listpole[X][Y]/10 != 0) {
                     PictureBox TicTac1 = new PictureBox();
@@ -114,7 +111,7 @@ namespace supper {
                     TicTac1.SizeMode = PictureBoxSizeMode.StretchImage;
                     TicTac1.Dock = DockStyle.Fill;
                     paneltabl.Controls.Add(TicTac1, X, Y);
-                    listpole[X][Y] = -200;
+                    listpole[X][Y] = -150;
                     count = 1;
                 } else {
                     listpole[X][Y] = 0;
@@ -154,16 +151,9 @@ namespace supper {
 
                     endgame = false;
                     // TimeSpan interval = new TimeSpan(0, 0, 2);
-                    // Thread.Sleep(2000);
-                    // picnull(button);
-                    // Thread.Sleep(2000);
                     addpic(button);
                     timer1.Stop();
-                    MessageBox.Show("Game Over.", "Attention!");
-                    // Thread.Sleep(2000);
-                    showmines();
-                    gameover();
-                    // window.Controls.Clear();
+                    gameover("The explosion, was a mine.");
                 }
             }
             return count;
@@ -180,8 +170,6 @@ namespace supper {
             Thread.Sleep(2000);
         }
         void addpic(object button1) {
-            // Thread.Sleep(2000);
-            // var button = (Button)paneltabl.GetControlFromPosition(X, Y);
             var button = (Button)button1;
             button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
             button.BackgroundImage = ImageList1.Images[2];
@@ -189,10 +177,8 @@ namespace supper {
             button.TabIndex = 1;
             button.TabStop = true;
             button.Dock = DockStyle.Fill;
-            // Thread.Sleep(2000);
         }
         void addmine(object button1) {
-            Thread.Sleep(2000);
             var button = (Button)button1;
             button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
             button.BackgroundImage = ImageList1.Images[1];
@@ -200,26 +186,29 @@ namespace supper {
             button.TabIndex = 1;
             button.TabStop = true;
             button.Dock = DockStyle.Fill;
-            Thread.Sleep(2000);
         }
 
-
-        
-        void funct() {}
-
         void showmines() {
+            Console.Write(cntmn);
             for (int i = 0; i < cnt; i++) {
                 for (int j = 0; j < cnt; j++) {
-                    if (listpole[i][j]/10 >= 10) {
-                        listpole[i][j] = -200;
-                        Button button = (Button)paneltabl.GetControlFromPosition(i, j);
-                        // Button button1 = (Button)button;
-                        button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
-                        button.BackgroundImage = ImageList1.Images[1];
-                        button.BackgroundImageLayout = ImageLayout.Center;
-                        button.TabIndex = 1;
-                        button.TabStop = true;
-                        button.Dock = DockStyle.Fill;
+                    if (listpole[i][j]/10 != -20) {
+                        if (listpole[i][j]/10 < 0 && listpole[i][j]/10 != -15) {
+                            listpole[i][j] = -listpole[i][j];
+                            paneltabl.GetControlFromPosition(i, j).Dispose();
+                            addbutton(j, i);
+                        }
+                        if (listpole[i][j]/10 >= 10) {
+                            listpole[i][j] = -200;
+                            Button button = (Button)paneltabl.GetControlFromPosition(i, j);
+                            Button button1 = (Button)button;
+                            button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+                            button.BackgroundImage = ImageList1.Images[1];
+                            button.BackgroundImageLayout = ImageLayout.Center;
+                            button.TabIndex = 1;
+                            button.TabStop = true;
+                            button.Dock = DockStyle.Fill;
+                        }
                     }
                 }
             }

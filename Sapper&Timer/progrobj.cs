@@ -11,17 +11,25 @@ using System.Drawing.Drawing2D;
 
 namespace supper {
     partial class Form1 {
+        bool timer1stop;
         void pause(object sender, EventArgs args) {
-            // остановка таймера
-            timer1.Stop();
+            timer1stop = !timer1stop;
+            if (timer1stop) {
+                timer1.Stop(); // остановка таймера
+            } else {
+                timer1.Start(); // запуск таймера
+            }
         }
 
         void restart(object sender, EventArgs args) {
-            cnt = 10;
-            cntmn = 11*cnt/10;
-            cntobj = cnt*cnt;
+            rstart();
+        }
+        void rstart() {
+            inicial(lvl);
+            timer1.Start();
             flagchoice = false;
             endgame = true;
+            fstep = true;
             for (int i = 0; i < cnt; i++) {
                 for (int j = 0; j < cnt; j++) {
                     if (listpole[i][j] < 0) {
@@ -35,16 +43,30 @@ namespace supper {
                 }
             }
             buttonflag.BackColor = Color.Transparent;
-            randommines();
-        }
+            // randommines();
+            }
 
         // завершение программы
         void end(object sender, EventArgs args) {
+            exit();
+        }
+        void exit() {
             Environment.Exit(0);
         }
 
-        void gameover() {
-            paneltabl.Visible = false;
+        void gameover(string str) {
+            showmines();
+            MessageBox.Show(str, "Attention!");
+            {
+                DialogResult dialogResult = MessageBox.Show("Start over?", "",
+                MessageBoxButtons.YesNo);
+                if(dialogResult == DialogResult.Yes) {
+                    rstart();
+                }
+                else if (dialogResult == DialogResult.No) {
+                    exit();
+                }
+            }
         }
     }
 }

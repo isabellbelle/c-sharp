@@ -16,62 +16,86 @@ namespace supper {
         Int32 cnt;
         Int32 cntmn;
         Int32 cntobj;
+        Int32 lvl;
         TableLayoutPanel abc;
+        bool fstep;
 
         private void timer1_Tick(object sender, EventArgs e) {
-            Console.Write(sec);
+            // Console.Write(sec);
             sec = sec - 1; //каждую секунду счетчик таймера секунд уменьшается на 1
-            if (sec == -1) {
+            if (min != 0 && sec == -1) {
                 //минута кончается, а секундная переменная становится меньше единицы
                 min = min - 1;
                 sec = 59;
             }
-            if (min == 0 && sec == 0) {
+            if (sec == -1) {
                 // время вышло
                 timer1.Stop();
-                MessageBox.Show("Time is over!", "Game over!");
-                gameover();
+                // MessageBox.Show("Time is over!", "Game over!");
+                gameover("Time is over!");
             }
             // вывод таймера на экран
             // labelmin.Text = Convert.ToString(m);
             // labelsec.Text = Convert.ToString(s);
+            labeltime.Text = String.Format("{0:d2}", min)
+            + " : " + String.Format("{0:d2}", sec);
+        }
+        void inicial(Int32 lvl) {
+            // label.Visible = false;
+            timer1stop = false;
+            fstep = true;
+            if (lvl== 2) {
+                min = 0;
+                sec = 40;
+                cnt = 12;
+                cntmn = 15;
+            }
+            if (lvl == 1) {
+                    min = 1;
+                    sec = 40;
+                    cnt = 10;
+                    cntmn = 11;
+                cntobj = cnt*cnt;
+            }
+            if (lvl == 0) {
+                min = 2;
+                sec = 20;
+                cnt = 8;
+                cntmn = 12;
+            }
+            // cntmn = 11*cnt/10;
+            cntobj = cnt*cnt;
         }
         void timerchoice2(object sender, System.EventArgs e) {
             abc.Visible = false;
-            min = 0;
-            sec = 40;
-            cnt = 12;
-            cntmn = 11*cnt/10;
-            cntobj = cnt*cnt;
+            lvl = 2;
+            inicial(lvl);
             createlistpole();
-            randommines();
             InitializeComponent();
+            // randommines();
             timer1.Start();
+            panel.Controls.Add(labeltime, 6, 0);
         }
         void timerchoice1(object sender, System.EventArgs e) {
             abc.Visible = false;
-            min = 1;
-            sec = 40;
-            cnt = 10;
-            cntmn = 11*cnt/10;
-            cntobj = cnt*cnt;
+            lvl = 1;
+            inicial(lvl);
             createlistpole();
-            randommines();
+            // randommines();
             InitializeComponent();
             // addcomponent();
             timer1.Start();
+            panel.Controls.Add(labeltime, 6, 0);
         }
         void timerchoice0(object sender, System.EventArgs e) {
             abc.Visible = false;
-            min = 2;
-            sec = 20;
-            cnt = 8;
-            cntmn = 11*cnt/10;
-            cntobj = cnt*cnt;
+            lvl = 0;
+            inicial(lvl);
             createlistpole();
-            randommines();
+            // randommines();
             InitializeComponent();
             timer1.Start();
+            panel.Controls.Add(labeltime, 7, 0);
         }
         void createbgnpnl() {
             abc = new TableLayoutPanel();
@@ -103,7 +127,7 @@ namespace supper {
             abc.Controls.Add(buttonlvl2, 1, 5);
             
             Button buttonlvl1 = new Button();
-            buttonlvl1.Text = "lvl 1";
+            buttonlvl1.Text = "lvl 1\n(recomended)";
             buttonlvl1.Dock = DockStyle.Fill;
             buttonlvl1.Click += new EventHandler(timerchoice1);
             // panel.Controls.Add(buttonlvl1, 0, 0);
@@ -115,9 +139,10 @@ namespace supper {
             buttonlvl0.Click += new EventHandler(timerchoice0);
             // panel.Controls.Add(buttonlvl0, 0, 0);
             abc.Controls.Add(buttonlvl0, 1, 1);
-            
+
+            // abc.SetColumnSpan(abc.GetControlFromPosition(0, 8), 3);
             abc.Controls.Add(label, 0, 8);
-            // abc.SetColumnSpan(label, 3);
+            abc.SetColumnSpan(label, 3);
         }
     }
 }
