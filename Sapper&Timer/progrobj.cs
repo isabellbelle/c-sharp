@@ -13,20 +13,32 @@ namespace supper {
     partial class Form1 {
         bool timer1stop;
         void pause(object sender, EventArgs args) {
-            timer1stop = !timer1stop;
-            if (timer1stop) {
-                timer1.Stop(); // остановка таймера
-            } else {
-                timer1.Start(); // запуск таймера
+            if (!fstep) {
+                timer1stop = !timer1stop;
+                if (timer1stop) {
+                    buttonpause.Text = "cntue";
+                    timer1.Stop(); // остановка таймера
+                } else {
+                    buttonpause.Text = "pause";
+                    timer1.Start(); // запуск таймера
+                }
+            }
+        }
+        void clickspace(object sender, KeyEventArgs e) {
+            // Console.Write("wert");
+            if (e.KeyCode == Keys.Space) {
+                buttonpause.PerformClick();
             }
         }
 
         void restart(object sender, EventArgs args) {
-            rstart();
+            if (!fstep) {
+                rstart();
+            }
         }
         void rstart() {
-            inicial(lvl);
-            timer1.Start();
+            timer1.Stop();
+            inicial(lvl, 0);
             flagchoice = false;
             endgame = true;
             fstep = true;
@@ -43,7 +55,7 @@ namespace supper {
                 }
             }
             buttonflag.BackColor = Color.Transparent;
-            // randommines();
+            buttonflag.Text = String.Format("{0:d}", cntmn);
             }
 
         // завершение программы

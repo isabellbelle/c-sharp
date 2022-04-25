@@ -19,9 +19,9 @@ namespace supper {
         Int32 lvl;
         TableLayoutPanel abc;
         bool fstep;
+        private System.Windows.Forms.Label labeltime;
 
         private void timer1_Tick(object sender, EventArgs e) {
-            // Console.Write(sec);
             sec = sec - 1; //каждую секунду счетчик таймера секунд уменьшается на 1
             if (min != 0 && sec == -1) {
                 //минута кончается, а секундная переменная становится меньше единицы
@@ -31,17 +31,13 @@ namespace supper {
             if (sec == -1) {
                 // время вышло
                 timer1.Stop();
-                // MessageBox.Show("Time is over!", "Game over!");
                 gameover("Time is over!");
             }
-            // вывод таймера на экран
-            // labelmin.Text = Convert.ToString(m);
-            // labelsec.Text = Convert.ToString(s);
             labeltime.Text = String.Format("{0:d2}", min)
             + " : " + String.Format("{0:d2}", sec);
         }
-        void inicial(Int32 lvl) {
-            // label.Visible = false;
+        int inicial(Int32 lvl, Int32 fl) {
+            int replay = 1;
             timer1stop = false;
             fstep = true;
             if (lvl== 2) {
@@ -63,41 +59,73 @@ namespace supper {
                 cnt = 8;
                 cntmn = 12;
             }
-            // cntmn = 11*cnt/10;
-            cntobj = cnt*cnt;
+
+            if (fl == 1) {
+                DialogResult dialogResult = MessageBox.Show("level --- " + String.Format("{0:d}", lvl) +
+                "\nplaying field --- " + String.Format("{0:d}", cnt) +
+                "x"+ String.Format("{0:d}", cnt) +
+                "\nmines --- " + String.Format("{0:d}", cntmn) +
+                "\ntime --- " + String.Format("{0:d2}", min) + "min " +
+                String.Format("{0:d2}", sec) + "sec\n" +
+                "------------------------------------------------\n" +
+                "space --- pause\n" + "right mouse button --- flag", "Info:",
+                MessageBoxButtons.YesNo);
+                if(dialogResult == DialogResult.Yes) {
+                    replay = 0;
+                } else if (dialogResult == DialogResult.No) {
+                    replay = 1;
+                }
+            } else {
+                replay = 0;
+            }
+
+            if (replay == 0) {
+                cntobj = cnt*cnt;
+                labeltime.Dock = DockStyle.Fill;
+                labeltime.Text = String.Format("{0:d2}", min)
+                + " : " + String.Format("{0:d2}", sec);
+                if (fl == 1)
+                    abc.Visible = false;
+            }
+            return replay;
         }
         void timerchoice2(object sender, System.EventArgs e) {
-            abc.Visible = false;
             lvl = 2;
-            inicial(lvl);
-            createlistpole();
-            InitializeComponent();
-            // randommines();
-            timer1.Start();
-            panel.Controls.Add(labeltime, 6, 0);
+            labeltime = new System.Windows.Forms.Label();
+            if (inicial(lvl, 1) == 0) {
+                labeltime.Font = new Font("Times New Roman", 15);
+                labeltime.TextAlign = ContentAlignment.MiddleCenter;
+                createlistpole();
+                InitializeComponent();
+                panel.Controls.Add(labeltime, 6, 0);
+            }
         }
         void timerchoice1(object sender, System.EventArgs e) {
-            abc.Visible = false;
             lvl = 1;
-            inicial(lvl);
-            createlistpole();
-            // randommines();
-            InitializeComponent();
-            // addcomponent();
-            timer1.Start();
-            panel.Controls.Add(labeltime, 6, 0);
+            labeltime = new System.Windows.Forms.Label();
+            if (inicial(lvl, 1) == 0) {
+                labeltime.Font = new Font("Times New Roman", 15);
+                labeltime.TextAlign = ContentAlignment.MiddleCenter;
+                createlistpole();
+                InitializeComponent();
+                panel.Controls.Add(labeltime, 6, 0);
+            }
         }
         void timerchoice0(object sender, System.EventArgs e) {
-            abc.Visible = false;
             lvl = 0;
-            inicial(lvl);
-            createlistpole();
-            // randommines();
-            InitializeComponent();
-            timer1.Start();
-            panel.Controls.Add(labeltime, 7, 0);
+            labeltime = new System.Windows.Forms.Label();
+            if (inicial(lvl, 1) == 0) {
+                labeltime.Font = new Font("Times New Roman", 15);
+                labeltime.TextAlign = ContentAlignment.MiddleCenter;
+                createlistpole();
+                InitializeComponent();
+                panel.Controls.Add(labeltime, 7, 0);
+            }
         }
         void createbgnpnl() {
+            this.Name = "Form1";
+            this.Text = "Sapper";
+
             abc = new TableLayoutPanel();
             abc.ColumnCount = 3;
             abc.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));
@@ -119,28 +147,21 @@ namespace supper {
             Button buttonlvl2 = new Button();
             buttonlvl2.Text = "lvl 2";
             buttonlvl2.Dock = DockStyle.Fill;
-            // buttonexit.Font = new Font("Arial", 15);
-            // buttonexit.BackColor = Color.Red;
-            // buttonexit.ForeColor = Color.White;
             buttonlvl2.Click += new EventHandler(timerchoice2);
-            // panel.Controls.Add(buttonlvl2, 0, 0);
             abc.Controls.Add(buttonlvl2, 1, 5);
             
             Button buttonlvl1 = new Button();
             buttonlvl1.Text = "lvl 1\n(recomended)";
             buttonlvl1.Dock = DockStyle.Fill;
             buttonlvl1.Click += new EventHandler(timerchoice1);
-            // panel.Controls.Add(buttonlvl1, 0, 0);
             abc.Controls.Add(buttonlvl1, 1, 3);
             
             Button buttonlvl0 = new Button();
             buttonlvl0.Text = "lvl 0";
             buttonlvl0.Dock = DockStyle.Fill;
             buttonlvl0.Click += new EventHandler(timerchoice0);
-            // panel.Controls.Add(buttonlvl0, 0, 0);
             abc.Controls.Add(buttonlvl0, 1, 1);
 
-            // abc.SetColumnSpan(abc.GetControlFromPosition(0, 8), 3);
             abc.Controls.Add(label, 0, 8);
             abc.SetColumnSpan(label, 3);
         }

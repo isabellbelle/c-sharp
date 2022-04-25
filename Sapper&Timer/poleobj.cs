@@ -25,18 +25,16 @@ namespace supper {
             // this.buttonpause = new System.Windows.Forms.Button();
             // this.buttonrestart = new System.Windows.Forms.Button();
             // this.buttonexit = new System.Windows.Forms.Button();
-            labeltime = new System.Windows.Forms.Label();
+
             // this.SuspendLayout();
             // Указываем заголовок окна
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
 
-            this.Name = "Form1";
-            this.Text = "Sapper";
-            // this.Height = 700;
-            // this.Width = 950;
             this.Height = 720;
             this.Width = 800;
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(clickspace);
             
             this.thispnl = new TableLayoutPanel();
             this.thispnl.ColumnCount = 2;
@@ -52,7 +50,7 @@ namespace supper {
             window.BackColor = Color.FromArgb(160, 160, 160);
             thispnl.Controls.Add(this.window, 0, 0);
             thispnl.SetColumnSpan(this.window, 2);
-            
+
             createlabel();
             thispnl.Controls.Add(label, 1, 1);
             
@@ -103,6 +101,8 @@ namespace supper {
 
             buttonflag = new Button();
             buttonflag.Dock = DockStyle.Fill;
+            buttonflag.Text = String.Format("{0:d}", cntmn);
+            buttonflag.TextAlign = ContentAlignment.TopRight;
             buttonflag.Click += new EventHandler(choiceflag);
             buttonflag.BackgroundImage = ImageList1.Images[0];
             buttonflag.BackgroundImageLayout = ImageLayout.Center;
@@ -123,14 +123,8 @@ namespace supper {
             paneltabl.TabIndex = 0;
             window.Controls.Add(paneltabl);
             createpole();
-         
-            // this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            // this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            // this.ClientSize = new System.Drawing.Size(300, 253);
-            this.Controls.Add(this.thispnl);
 
-            // this.ResumeLayout(false);
-            // this.PerformLayout();
+            this.Controls.Add(this.thispnl);
         }
 
         void createlabel() {
@@ -140,7 +134,6 @@ namespace supper {
             label.Height = 2*this.Height/28;
             label.Dock = DockStyle.Fill;
             label.Text = "Made by isabelle.(tap here)";
-            // label.Text = "Made by isabelle.\n(tap here)";
             label.Font = new Font("Times New Roman", 12);
             label.BackColor = Color.White;
             label.ForeColor = Color.Black;
@@ -159,10 +152,15 @@ namespace supper {
             // this.Width = 800;
             Button button = new Button();
             button.Dock = DockStyle.Fill;
-            // button.Text = row.ToString();
             button.BackColor = Color.FromArgb(240, 240, 240);
             button.Click += new EventHandler(clickbutton);
+            button.MouseDown += new MouseEventHandler(btn_MouseDown);
             paneltabl.Controls.Add(button, column, row);
+        }
+        void btn_MouseDown(object sender, MouseEventArgs e) {
+            if (e.Button == MouseButtons.Right) {
+                addflag(sender);
+            }
         }
 
         private System.Windows.Forms.Timer timer1;
@@ -176,6 +174,5 @@ namespace supper {
         private System.Windows.Forms.Button buttonrestart;
         private System.Windows.Forms.Button buttonexit;
         private System.Windows.Forms.Button buttonflag;
-        private System.Windows.Forms.Label labeltime;
     }
 }

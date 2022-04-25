@@ -14,20 +14,7 @@ namespace supper {
         public Form1() {
             createlabel();
             createbgnpnl();
-            // InitializeComponent();
-            // createbgnpnl();
-            // sec = 40;
-            // cnt = 10;
-            // cntmn = 11*cnt/10;
-            // cntobj = cnt*cnt;
-            // createlistpole();
-            // randommines();
-            // addcomponent();
-            // timerchoice(1);
-            // InitializeComponent();
-            // addcomponent();
             createlistpole();
-            // randommines();
         }
 
         // получение ссылки на github
@@ -50,12 +37,13 @@ namespace supper {
 
         // добавление флага на кнопку
         void clickbutton(object sender, EventArgs args) {
-            if (fstep) {
+            if (fstep && !flagchoice) {
                 randommines(paneltabl.GetColumn((Control)sender),
                 paneltabl.GetRow((Control)sender));
+                timer1.Start();
                 fstep = !fstep;
             }
-            if (!timer1stop && !fstep) {
+            if (!timer1stop) {
                 if (flagchoice == true) {
                     addflag(sender);
                 } else {
@@ -66,7 +54,6 @@ namespace supper {
                 }
                 if (cntobj - cntmn == 0 && endgame == true) {
                     timer1.Stop();
-                    // MessageBox.Show ("You win!", "Game over!");
                     gameover("You win!");
                 }
             }
@@ -97,6 +84,9 @@ namespace supper {
                     MessageBox.Show("The maximum number of flags has been exceeded.", "Attention!");
                 }
             }
+            buttonflag.Text = String.Format("{0:d}", cntmn);
+            // buttonflag.TextAlign = ContentAlignment.TopRight;
+            // buttonflag.Enabled = true;
         }
     
         Int32 choisesqr(Int32 X, Int32 Y) {
@@ -171,6 +161,7 @@ namespace supper {
         }
         void addpic(object button1) {
             var button = (Button)button1;
+            button.BackColor = Color.FromArgb(250, 50, 50);
             button.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
             button.BackgroundImage = ImageList1.Images[2];
             button.BackgroundImageLayout = ImageLayout.Center;
@@ -189,7 +180,6 @@ namespace supper {
         }
 
         void showmines() {
-            Console.Write(cntmn);
             for (int i = 0; i < cnt; i++) {
                 for (int j = 0; j < cnt; j++) {
                     if (listpole[i][j]/10 != -20) {
