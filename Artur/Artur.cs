@@ -30,7 +30,7 @@ public class Trax : Form {
         // пока при нажатии ничего не происходит!
         button1 = new Button();
         button1.Font = new Font("Arial", 18);
-        button1.Text = "Трахнуть!";
+        button1.Text = "Пожать руку!";
         button1.Top = 125;
         button1.Left = 387;
         button1.Height = 100;
@@ -108,8 +108,8 @@ public class Trax : Form {
             
         // Добавляем на панель метку
         Label label1 = new Label();
-        label1.Text = "Вы трахнули Артура!";
-        label1.Font = new Font("Times New Roman", 38);
+        label1.Text = "Вы пожали руку Артуру!";
+        label1.Font = new Font("Times New Roman", 32);
         
         label1.Location = new Point(225, 400);
         label1.Width = 520;
