@@ -38,10 +38,10 @@ namespace supper {
             TicTac.Dock = DockStyle.Fill;
             paneltabl.Controls.Add(TicTac, X, Y);
             listpole[3*Y + X] = 1;
-            Console.WriteLine(listpole);
+            // Console.WriteLine(listpole);
             hod += 1;
             makehod(hod, str);
-            Console.WriteLine(str);
+            // Console.WriteLine(str);
         }
 
         void makehod(Int32 hod, string str) {
